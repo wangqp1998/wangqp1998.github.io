@@ -9,8 +9,6 @@
     
     <title>
         
-            C++ |
-        
         wangqp
     </title>
     
@@ -67,7 +65,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/c/"
                             >
                                 C++
@@ -111,7 +109,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/c/">C++</a>
                 </li>
             
@@ -144,7 +142,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">C++</span>
+            <span class="title-hover-animation"></span>
         </div>
 
         
@@ -163,8 +161,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-09-10 00:00:00</span>
-        <span class="mobile">2021-09-10 00:00</span>
+        <span class="pc">2022-09-10 21:12:17</span>
+        <span class="mobile">2022-09-10 21:12</span>
     </span>
     
     
@@ -181,10 +179,13 @@
         
 
         <div class="article-content markdown-body">
-            <p><a href="/C++/C++%E7%BB%93%E6%9E%84%E4%BD%93%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%8E%9F%E5%88%99">C++结构体内存分配原则</a></p>
-<p><a href="/C++/C++%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5">C++内存泄漏的几种情况</a></p>
-<p><a href="/C++/C++%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93">C++面经总结</a></p>
-
+            <p><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/liushui-sky/p/7727865.html" >https://www.cnblogs.com/liushui-sky/p/7727865.html<i class="fas fa-external-link-alt"></i></a></p>
+<h1 id="1-在类的构造函数和析构函数中没有匹配的调用new和delete函数"><a href="#1-在类的构造函数和析构函数中没有匹配的调用new和delete函数" class="headerlink" title="1.在类的构造函数和析构函数中没有匹配的调用new和delete函数"></a>1.在类的构造函数和析构函数中没有匹配的调用new和delete函数</h1><p>两种情况下会出现这种内存泄露：一是在堆里创建了对象占用了内存，但是没有显示地释放对象占用的内存；二是在类的构造函数中动态的分配了内存，但是在析构函数中没有释放内存或者没有正确的释放内存</p>
+<h1 id="2-没有正确地清除嵌套的对象指针"><a href="#2-没有正确地清除嵌套的对象指针" class="headerlink" title="2. 没有正确地清除嵌套的对象指针"></a>2. 没有正确地清除嵌套的对象指针</h1><h1 id="3-在释放对象数组时在delete中没有使用方括号"><a href="#3-在释放对象数组时在delete中没有使用方括号" class="headerlink" title="3. 在释放对象数组时在delete中没有使用方括号"></a>3. 在释放对象数组时在delete中没有使用方括号</h1><p>方括号是告诉编译器这个指针指向的是一个对象数组，同时也告诉编译器正确的对象地址值并调用对象的析构函数，如果没有方括号，那么这个指针就被默认为只指向一个对象，对象数组中的其他对象的析构函数就不会被调用，结果造成了内存泄露。如果在方括号中间放了一个比对象数组大小还大的数字，那么编译器就会调用无效对象（内存溢出）的析构函数，会造成堆的奔溃。如果方括号中间的数字值比对象数组的大小小的话，编译器就不能调用足够多个析构函数，结果会造成内存泄露。</p>
+<p><font color='red'> 释放单个对象、单个基本数据类型的变量或者是基本数据类型的数组不需要大小参数，释放定义了析构函数的对象数组才需要大小参数。 </font></p>
+<h1 id="4-指向对象的指针数组不等同于对象数组"><a href="#4-指向对象的指针数组不等同于对象数组" class="headerlink" title="4.指向对象的指针数组不等同于对象数组"></a>4.指向对象的指针数组不等同于对象数组</h1><p>对象数组是指：数组中存放的是对象，只需要delete []p，即可调用对象数组中的每个对象的析构函数释放空间</p>
+<p>指向对象的指针数组是指：<font color='red'>数组中存放的是指向对象的指针，不仅要释放每个对象的空间，还要释放每个指针的空间，delete []p只是释放了每个指针，但是并没有释放对象的空间，正确的做法，是通过一个循环，将每个对象释放了，然后再把指针释放了。</font></p>
+<h1 id="5-缺少拷贝构造函数"><a href="#5-缺少拷贝构造函数" class="headerlink" title="5. 缺少拷贝构造函数"></a>5. 缺少拷贝构造函数</h1>
         </div>
 
         
@@ -194,29 +195,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/C++/C++%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">C++面经总结</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/Codeing/"
+                           href="/C++/C++%E7%BB%93%E6%9E%84%E4%BD%93%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%8E%9F%E5%88%99/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">数据结构与算法</span>
+                                <span class="post-nav-title-item"></span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -327,7 +313,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%9C%A8%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E4%B8%AD%E6%B2%A1%E6%9C%89%E5%8C%B9%E9%85%8D%E7%9A%84%E8%B0%83%E7%94%A8new%E5%92%8Cdelete%E5%87%BD%E6%95%B0"><span class="nav-text">1.在类的构造函数和析构函数中没有匹配的调用new和delete函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%B2%A1%E6%9C%89%E6%AD%A3%E7%A1%AE%E5%9C%B0%E6%B8%85%E9%99%A4%E5%B5%8C%E5%A5%97%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%8C%87%E9%92%88"><span class="nav-text">2. 没有正确地清除嵌套的对象指针</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%9C%A8%E9%87%8A%E6%94%BE%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84%E6%97%B6%E5%9C%A8delete%E4%B8%AD%E6%B2%A1%E6%9C%89%E4%BD%BF%E7%94%A8%E6%96%B9%E6%8B%AC%E5%8F%B7"><span class="nav-text">3. 在释放对象数组时在delete中没有使用方括号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%8C%87%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E4%B8%8D%E7%AD%89%E5%90%8C%E4%BA%8E%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84"><span class="nav-text">4.指向对象的指针数组不等同于对象数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%BC%BA%E5%B0%91%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-text">5. 缺少拷贝构造函数</span></a></li></ol>
     </div>
 </div>
         </aside>
