@@ -9,7 +9,7 @@
     
     <title>
         
-            Archive |
+            C++总结 |
         
         wangqp
     </title>
@@ -67,7 +67,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class=""
+                            <a class="active"
                                href="/2021/09/10/c/"
                             >
                                 C++
@@ -95,7 +95,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class=""
+                    <a class="active"
                        href="/2021/09/10/c/">C++</a>
                 </li>
             
@@ -115,48 +115,95 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="archive-container ">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">C++总结</span>
+        </div>
+
         
-<div class="archive-list-container">
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">王秋鹏</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-09-10 00:00:00</span>
+        <span class="mobile">2021-09-10 00:00</span>
+    </span>
     
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2022</span>
-                <span class="archive-year-post-count">[1]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/09/10/hello-world/"
-                        >Hello World</a>
-                        <span class="article-date">09-10</span>
-                    </li>
-                
-            </ul>
-        </section>
     
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2021</span>
-                <span class="archive-year-post-count">[1]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/09/10/c/"
-                        >C++总结</a>
-                        <span class="article-date">09-10</span>
-                    </li>
-                
-            </ul>
-        </section>
+
+    
+    
+    
     
 </div>
 
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="1-1-关键字"><a href="#1-1-关键字" class="headerlink" title="1.1 关键字"></a>1.1 关键字</h2><h3 id="1-1-1-static"><a href="#1-1-1-static" class="headerlink" title="1.1.1 static"></a>1.1.1 static</h3><ul>
+<li><p><strong>函数体内 static 变量</strong>：作⽤范围为该函数体，不同于 auto 变量，该变量的内存只被分配⼀次，因此其值在下次调⽤时仍维持上次的值；</p>
+</li>
+<li><p><strong>在模块内的 static 全局变量</strong>：可以被模块内所⽤函数访问，但不能被模块外其它函数访问； </p>
+</li>
+<li><p><strong>在模块内的 static 函数</strong>：只可被这⼀模块内的其它函数调⽤，这个函数的使⽤范围被限制在声明它的模块内； </p>
+</li>
+<li><p><strong>在类中的 static 成员变量</strong>：属于整个类所拥有，对类的所有对象只有⼀份拷⻉； </p>
+</li>
+<li><p><strong>在类中的 static 成员函数</strong> ：属于整个类所拥有，这个函数不接收 this 指针，因⽽只能访问类的 static 成员变量。</p>
+</li>
+<li><p><strong>static 类对象</strong> ： 必须要在类外进⾏初始化，static 修饰的变量先于对象存在，所以 static 修饰的变量要在类外初始化；</p>
+<p>由于 static 修饰的类成员属于类，不属于对象，因此 static 类成员函数是没有 this 指针，this 指针是指向本对象的指针，正因为没有 this 指针，所以 static 类成员函数不能访问⾮ static 的类成员，只能访问 static修饰的类成员</p>
+<p>static 成员函数不能被 virtual 修饰，static 成员不属于任何对象或实例，所以加上 virtual 没有任何实际意义；静态成员函数没有 this 指针，虚函数的实现是为每⼀个对象分配⼀个 vptr 指针，⽽ vptr 是通过 this 指针调⽤的，所以不能为 virtual；虚函数的调⽤关系，this-&gt;vptr-&gt;ctable-&gt;virtual function。</p>
+</li>
+</ul>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/09/10/hello-world/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Hello World</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+            </div>
+        
+
+        
     </div>
 </div>
+
 
                 
             </div>
@@ -186,6 +233,23 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -232,6 +296,14 @@
     </div>
 
     
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-text">1.1 关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-static"><span class="nav-text">1.1.1 static</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
 
     <div class="image-viewer-container">
     <img src="">
@@ -263,6 +335,14 @@
 
 
 <div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
     
 </div>
 
