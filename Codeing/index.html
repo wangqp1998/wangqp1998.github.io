@@ -9,7 +9,7 @@
     
     <title>
         
-            C++总结 |
+            数据结构与算法 |
         
         wangqp
     </title>
@@ -67,18 +67,26 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
-                               href="/2021/09/10/c/"
+                            <a class=""
+                               href="/c/"
                             >
                                 C++
                             </a>
                         </li>
                     
                         <li class="menu-item">
-                            <a class=""
-                               href="/2021/09/10/Codeing/"
+                            <a class="active"
+                               href="/Codeing/"
                             >
                                 数据结构与算法
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
                             </a>
                         </li>
                     
@@ -103,13 +111,18 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/c/">C++</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
                     <a class="active"
-                       href="/2021/09/10/c/">C++</a>
+                       href="/Codeing/">数据结构与算法</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/2021/09/10/Codeing/">数据结构与算法</a>
+                       href="/about">关于</a>
                 </li>
             
         </ul>
@@ -131,7 +144,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">C++总结</span>
+            <span class="title-hover-animation">数据结构与算法</span>
         </div>
 
         
@@ -168,23 +181,9 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="1-1-关键字"><a href="#1-1-关键字" class="headerlink" title="1.1 关键字"></a>1.1 关键字</h2><h3 id="1-1-1-static"><a href="#1-1-1-static" class="headerlink" title="1.1.1 static"></a>1.1.1 static</h3><ul>
-<li><p><strong>函数体内 static 变量</strong>：作⽤范围为该函数体，不同于 auto 变量，该变量的内存只被分配⼀次，因此其值在下次调⽤时仍维持上次的值；</p>
-</li>
-<li><p><strong>在模块内的 static 全局变量</strong>：可以被模块内所⽤函数访问，但不能被模块外其它函数访问； </p>
-</li>
-<li><p><strong>在模块内的 static 函数</strong>：只可被这⼀模块内的其它函数调⽤，这个函数的使⽤范围被限制在声明它的模块内； </p>
-</li>
-<li><p><strong>在类中的 static 成员变量</strong>：属于整个类所拥有，对类的所有对象只有⼀份拷⻉； </p>
-</li>
-<li><p><strong>在类中的 static 成员函数</strong> ：属于整个类所拥有，这个函数不接收 this 指针，因⽽只能访问类的 static 成员变量。</p>
-</li>
-<li><p><strong>static 类对象</strong> ： 必须要在类外进⾏初始化，static 修饰的变量先于对象存在，所以 static 修饰的变量要在类外初始化；</p>
-<p>由于 static 修饰的类成员属于类，不属于对象，因此 static 类成员函数是没有 this 指针，this 指针是指向本对象的指针，正因为没有 this 指针，所以 static 类成员函数不能访问⾮ static 的类成员，只能访问 static修饰的类成员</p>
-<p>static 成员函数不能被 virtual 修饰，static 成员不属于任何对象或实例，所以加上 virtual 没有任何实际意义；静态成员函数没有 this 指针，虚函数的实现是为每⼀个对象分配⼀个 vptr 指针，⽽ vptr 是通过 this 指针调⽤的，所以不能为 virtual；虚函数的调⽤关系，this-&gt;vptr-&gt;ctable-&gt;virtual function。</p>
-</li>
-</ul>
-
+            <h3 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h3><h4 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a><a href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a></h4><h3 id="📝Leetcode"><a href="#📝Leetcode" class="headerlink" title="📝Leetcode"></a>📝Leetcode</h3><p><a href="/Leetcode/684/">684.冗余连接树可以看成是一个连通且无环的无向图</a></p>
+<p><a href="/Leetcode/2367/">2367. 算术三元组的数目</a></p>
+<h3 id="💯笔试记录"><a href="#💯笔试记录" class="headerlink" title="💯笔试记录"></a>💯笔试记录</h3><h4 id="2022年8月22日-美团笔试"><a href="#2022年8月22日-美团笔试" class="headerlink" title="2022年8月22日 美团笔试"></a><a href="/%E7%AC%94%E8%AF%95%E8%AE%B0%E5%BD%95/20220813%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/">2022年8月22日 美团笔试</a></h4>
         </div>
 
         
@@ -194,21 +193,21 @@
         
             <div class="article-nav">
                 
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2021/09/10/Codeing/"
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/c/"
                         >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">数据结构与算法</span>
-                                <span class="post-nav-item">Next posts</span>
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
                             </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C++总结</span>
+                                <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
                     </div>
+                
                 
             </div>
         
@@ -312,7 +311,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-text">1.1 关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-static"><span class="nav-text">1.1.1 static</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="nav-text">数据结构与算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="nav-text">并查集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%9DLeetcode"><span class="nav-text">📝Leetcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%AF%E7%AC%94%E8%AF%95%E8%AE%B0%E5%BD%95"><span class="nav-text">💯笔试记录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2022%E5%B9%B48%E6%9C%8822%E6%97%A5-%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95"><span class="nav-text">2022年8月22日 美团笔试</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>

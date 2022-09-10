@@ -9,7 +9,7 @@
     
     <title>
         
-            C++总结 |
+            并查集 |
         
         wangqp
     </title>
@@ -68,7 +68,7 @@
                     
                         <li class="menu-item">
                             <a class=""
-                               href="/2021/09/10/c/"
+                               href="/c/"
                             >
                                 C++
                             </a>
@@ -76,9 +76,17 @@
                     
                         <li class="menu-item">
                             <a class=""
-                               href="/2021/09/10/Codeing/"
+                               href="/Codeing/"
                             >
                                 数据结构与算法
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
                             </a>
                         </li>
                     
@@ -104,12 +112,17 @@
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/2021/09/10/c/">C++</a>
+                       href="/c/">C++</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/2021/09/10/Codeing/">数据结构与算法</a>
+                       href="/Codeing/">数据结构与算法</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
                 </li>
             
         </ul>
@@ -128,47 +141,12 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="article-content-container">
-
-        <div class="article-title">
-            <span class="title-hover-animation">C++总结</span>
-        </div>
-
+    <div class="page-template-container">
         
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/images/avatar.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">王秋鹏</span>
-                        
-                            <span class="author-label">Lv1</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-09-10 00:00:00</span>
-        <span class="mobile">2021-09-10 00:00</span>
-    </span>
-    
-    
-
-    
-    
-    
-    
-</div>
-
-                    </div>
-                </div>
-            </div>
         
-
-        <div class="article-content markdown-body">
-            <h3 id="1-概论"><a href="#1-概论" class="headerlink" title="1. 概论"></a>1. 概论</h3><p>定义：<br>并查集是一种树型的数据结构，用于处理一些不相交集合的合并及查询问题（即所谓的并、查）。比如说，我们可以用并查集来判断一个森林中有几棵树、某个节点是否属于某棵树等。</p>
+        <div class="page-template-content markdown-body">
+            
+                <h3 id="1-概论"><a href="#1-概论" class="headerlink" title="1. 概论"></a>1. 概论</h3><p>定义：<br>并查集是一种树型的数据结构，用于处理一些不相交集合的合并及查询问题（即所谓的并、查）。比如说，我们可以用并查集来判断一个森林中有几棵树、某个节点是否属于某棵树等。</p>
 <p>主要构成<br>并查集主要由一个整型<a class="link"   target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B0%E7%BB%84&spm=1001.2101.3001.7020" >数组<i class="fas fa-external-link-alt"></i></a>pre[ ]和两个函数find( )、join( )构成。<br>数组 pre[ ] 记录了每个点的前驱节点是谁，函数 find(x) 用于查找指定节点 x 属于哪个集合，函数 join(x,y) 用于合并两个节点 x 和 y 。</p>
 <p>作用：<br>并查集的主要作用是求连通分支数（如果一个图中所有点都存在可达关系（直接或间接相连），则此图的连通分支数为1；如果此图有两大<a class="link"   target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%AD%90%E5%9B%BE&spm=1001.2101.3001.7020" >子图<i class="fas fa-external-link-alt"></i></a>各自全部可达，则此图的连通分支数为2……）</p>
 <hr>
@@ -208,35 +186,11 @@
 
 
 <h3 id="原文链接：https-blog-csdn-net-the-ZED-article-details-105126583"><a href="#原文链接：https-blog-csdn-net-the-ZED-article-details-105126583" class="headerlink" title="原文链接：https://blog.csdn.net/the_ZED/article/details/105126583"></a>原文链接：<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/the_ZED/article/details/105126583" >https://blog.csdn.net/the_ZED/article/details/105126583<i class="fas fa-external-link-alt"></i></a></h3>
+            
         </div>
-
-        
-
-        
-
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/09/10/Leetcode/684/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">684.冗余连接树可以看成是一个连通且无环的无向图。</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-            </div>
-        
-
-        
+        <div class="page-template-comments">
+            
+        </div>
     </div>
 </div>
 
@@ -269,23 +223,6 @@
         </div>
     </div>
 
-    
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="tools-list">
-        <!-- TOC aside toggle -->
-        
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
-            </li>
-        
-
-        <!-- go comment -->
-        
-    </ul>
-</div>
-
-        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -332,14 +269,6 @@
     </div>
 
     
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A6%82%E8%AE%BA"><span class="nav-text">1. 概论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%B9%B6%E6%9F%A5%E9%9B%86%E7%9A%84%E7%8E%B0%E5%AE%9E%E6%84%8F%E4%B9%89"><span class="nav-text">2. 并查集的现实意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-find-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-text">3. find( )函数的定义与实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-join-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-text">4. join( )函数的定义与实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E4%B9%8B%E4%B8%80%EF%BC%88%E4%BC%98%E5%8C%96find-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="nav-text">5. 路径压缩算法之一（优化find( )函数）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%EF%BC%88%E5%8A%A0%E6%9D%83%E6%A0%87%E8%AE%B0%E6%B3%95%EF%BC%89"><span class="nav-text">6. 路径压缩算法之二（加权标记法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E6%80%BB%E7%BB%93"><span class="nav-text">7. 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E6%96%87%E9%93%BE%E6%8E%A5%EF%BC%9Ahttps-blog-csdn-net-the-ZED-article-details-105126583"><span class="nav-text">原文链接：https:&#x2F;&#x2F;blog.csdn.net&#x2F;the_ZED&#x2F;article&#x2F;details&#x2F;105126583</span></a></li></ol>
-    </div>
-</div>
-        </aside>
-    
 
     <div class="image-viewer-container">
     <img src="">
@@ -371,14 +300,6 @@
 
 
 <div class="post-scripts">
-    
-        
-<script src="/js/left-side-toggle.js"></script>
-
-<script src="/js/libs/anime.min.js"></script>
-
-<script src="/js/toc.js"></script>
-
     
 </div>
 

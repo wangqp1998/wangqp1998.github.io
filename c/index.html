@@ -9,7 +9,7 @@
     
     <title>
         
-            C++ |
+            C++总结 |
         
         wangqp
     </title>
@@ -67,8 +67,8 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class=""
-                               href="/2021/09/10/c/"
+                            <a class="active"
+                               href="/c/"
                             >
                                 C++
                             </a>
@@ -76,9 +76,17 @@
                     
                         <li class="menu-item">
                             <a class=""
-                               href="/2021/09/10/Codeing/"
+                               href="/Codeing/"
                             >
                                 数据结构与算法
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
                             </a>
                         </li>
                     
@@ -103,13 +111,18 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/2021/09/10/c/">C++</a>
+                    <a class="active"
+                       href="/c/">C++</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/2021/09/10/Codeing/">数据结构与算法</a>
+                       href="/Codeing/">数据结构与算法</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
                 </li>
             
         </ul>
@@ -128,17 +141,191 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="page-template-container">
-        
-        
-        <div class="page-template-content markdown-body">
-            
-                <h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><h2 id="111"><a href="#111" class="headerlink" title="111"></a>111</h2>
-            
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">C++总结</span>
         </div>
-        <div class="page-template-comments">
-            
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">王秋鹏</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-09-10 00:00:00</span>
+        <span class="mobile">2021-09-10 00:00</span>
+    </span>
+    
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="1-1-关键字"><a href="#1-1-关键字" class="headerlink" title="1.1 关键字"></a>1.1 关键字</h2><h3 id="1-1-1-static"><a href="#1-1-1-static" class="headerlink" title="1.1.1 static"></a>1.1.1 static</h3><ul>
+<li><p><strong>函数体内 static 变量</strong>：作⽤范围为该函数体，不同于 auto 变量，该变量的内存只被分配⼀次，因此其值在下次调⽤时仍维持上次的值；</p>
+</li>
+<li><p><strong>在模块内的 static 全局变量</strong>：可以被模块内所⽤函数访问，但不能被模块外其它函数访问； </p>
+</li>
+<li><p><strong>在模块内的 static 函数</strong>：只可被这⼀模块内的其它函数调⽤，这个函数的使⽤范围被限制在声明它的模块内； </p>
+</li>
+<li><p><strong>在类中的 static 成员变量</strong>：属于整个类所拥有，对类的所有对象只有⼀份拷⻉； </p>
+</li>
+<li><p><strong>在类中的 static 成员函数</strong> ：属于整个类所拥有，这个函数不接收 this 指针，因⽽只能访问类的 static 成员变量。</p>
+</li>
+<li><p><strong>static 类对象</strong> ： 必须要在类外进⾏初始化，static 修饰的变量先于对象存在，所以 static 修饰的变量要在类外初始化；</p>
+<p>由于 static 修饰的类成员属于类，不属于对象，因此 static 类成员函数是没有 this 指针，this 指针是指向本对象的指针，正因为没有 this 指针，所以 static 类成员函数不能访问⾮ static 的类成员，只能访问 static修饰的类成员</p>
+<p>static 成员函数不能被 virtual 修饰，static 成员不属于任何对象或实例，所以加上 virtual 没有任何实际意义；静态成员函数没有 this 指针，虚函数的实现是为每⼀个对象分配⼀个 vptr 指针，⽽ vptr 是通过 this 指针调⽤的，所以不能为 virtual；虚函数的调⽤关系，this-&gt;vptr-&gt;ctable-&gt;virtual function。</p>
+</li>
+</ul>
+<h3 id="1-1-2-const"><a href="#1-1-2-const" class="headerlink" title="1.1.2 const"></a>1.1.2 const</h3><p><strong>const</strong> <strong>修饰基本类型数据类型</strong>：基本数据类型，修饰符 const 可以⽤在类型说明符前，也可以⽤在类型说明符后，其结果是⼀样的。在使⽤这些常量的时候，只要不改变这些常量的值即可。</p>
+<p><strong>const</strong> <strong>修饰指针变量和引⽤变量</strong>：如果 const 位于⼩星星的左侧，则 const 就是⽤来修饰指针所指向的变量，即指针指向为常量；如果 const 位于⼩星星的右侧，则 const 就是修饰指针本身，即指针本身是常量。</p>
+<p><strong>const</strong> <strong>应⽤到函数中</strong>：作为参数的 const 修饰符：调⽤函数的时候，⽤相应的变量初始化 const 常量，则在函数体中，按照 const 所修饰的部分进⾏常量化，保护了原对象的属性。 [注意]：参数 const 通常⽤于参数为指针或引⽤的情况; 作为函数返回值的 const 修饰符：声明了返回值后，const 按照”修饰原则”进⾏修饰，起到相应的保护作⽤。</p>
+<p><strong>const</strong> <strong>在类中的⽤法</strong>：const 成员变量，只在某个对象⽣命周期内是常量，⽽对于整个类⽽⾔是可以改变的。因为类可以创建多个对象，不同的对象其 const 数据成员值可以不同。所以不能在类的声明中初始化 const 数据成员，因为类的对象在没有创建时候，编译器不知道 const 数据成员的值是什么。const 数据成员的初始化只能在类的构造函数的初始化列表中进⾏。const 成员函数：const 成员函数的主要⽬的是防⽌成员函数修改对象的内容。要注意，const 关键字和 static 关键字对于成员函数来说是不能同时使⽤的，因为 static 关键字修饰静态成员函数不含有 this 指针，即不能实例化，const 成员函数⼜必须具体到某⼀个函数。</p>
+<p><strong>const</strong> <strong>修饰类对象，定义常量对象</strong>：常量对象只能调⽤常ᰁ函数，别的成员函数都不能调⽤。</p>
+<h3 id="1-1-3-volatile"><a href="#1-1-3-volatile" class="headerlink" title="1.1.3 volatile"></a>1.1.3 volatile</h3><p><strong>易变性：</strong>在汇编层⾯反映出来，就是两条语句，下⼀条语句不会直接使⽤上⼀条语句对应的 volatile 变量的寄存器内容，⽽是重新从内存中读取。</p>
+<p><strong>不可优化性：</strong>volatile 告诉编译器，不要对我这个变量进⾏各种激进的优化，甚⾄将变量直接消除，保证程序员写在代码中的指令，⼀定会被执⾏。</p>
+<p><strong>顺序性：</strong>能够保证 volatile 变量之间的顺序性，编译器不会进⾏乱序优化。</p>
+<h3 id="1-1-4-extern"><a href="#1-1-4-extern" class="headerlink" title="1.1.4 extern"></a>1.1.4 extern</h3><p>在 C 语⾔中，修饰符 extern ⽤在变ᰁ或者函数的声明前，⽤来说明 “此变ᰁ/函数是在别处定义的，要在此处引⽤”。</p>
+<p>注意 extern 声明的位置对其作⽤域也有关系，如果是在 main 函数中进⾏声明的，则只能在 main 函数中调⽤，在其它函数中不能调⽤。其实要调⽤其它⽂件中的函数和变量，只需把该⽂件⽤ #include 包含进来即可，为啥要⽤extern？因为⽤ extern 会加速程序的编译过程，这样能节省时间。</p>
+<p>在 C++ 中 extern 还有另外⼀种作⽤，⽤于指示 C 或者 C＋＋函数的调⽤规范。⽐如在 C＋＋ 中调⽤ C 库函数，就需要在 C＋＋ 程序中⽤ extern “C” 声明要引⽤的函数。这是给链接器⽤的，告诉链接器在链接的时候⽤C 函数规范来链接。主要原因是 C＋＋ 和 C 程序编译完成后在⽬标代码中命名规则不同，⽤此来解决名字匹配的问题。</p>
+<h3 id="1-1-5-define"><a href="#1-1-5-define" class="headerlink" title="1.1.5 define"></a>1.1.5 define</h3><h3 id="1-1-7-define和const区别"><a href="#1-1-7-define和const区别" class="headerlink" title="1.1.7 define和const区别"></a>1.1.7 define和const区别</h3><p><strong>对于</strong> <strong>define</strong> <strong>来说，</strong>宏定义实际上是在预编译阶段进⾏处理，没有类型，也就没有类型检查，仅仅做的是遇到宏定义进⾏字符串的展开，遇到多少次就展开多少次，⽽且这个简单的展开过程中，很容易出现边界效应，达不到预期的效果。因为 define 宏定义仅仅是展开，因此运⾏时系统并不为宏定义分配内存，但是从汇编 的⻆度来讲，define 却以⽴即数的⽅式保留了多份数据的拷⻉。</p>
+<p><strong>对于</strong> <strong>const</strong> <strong>来说，</strong>const 是在编译期间进⾏处理的，const 有类型，也有类型检查，程序运⾏时系统会为 const 常量分配内存，⽽且从汇编的⻆度讲，const 常ᰁ在出现的地⽅保留的是真正数据的内存地址，只保留了⼀份数据的拷⻉，省去了不必要的内存空间。⽽且，有时编译器不会为普通的 const 常ᰁ分配内存，⽽是直接将 const 常量添加到符号表中，省去了读取和写⼊内存的操作，效率更⾼。</p>
+<h2 id="1-2-智能指针"><a href="#1-2-智能指针" class="headerlink" title="1.2 智能指针"></a>1.2 智能指针</h2><h3 id="1-2-1-auto-ptr"><a href="#1-2-1-auto-ptr" class="headerlink" title="1.2.1 auto_ptr"></a>1.2.1 auto_ptr</h3><p>采用所有权模式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">auto_ptr&lt;std::string&gt; <span class="title">p1</span> <span class="params">(<span class="keyword">new</span> string (<span class="string">&quot;hello&quot;</span>))</span></span>;</span><br><span class="line">auto_ptr&lt;std::string&gt; p2;</span><br><span class="line">p2 = p1; <span class="comment">//auto_ptr 不会报错.</span></span><br></pre></td></tr></table></figure>
+
+<p>此时不会报错，p2 剥夺了 p1 的所有权，但是当程序运⾏时访问 p1 将会报错。所以 auto_ptr 的缺点是：存在潜 在的内存崩溃问题！</p>
+<h3 id="1-2-2-unique-ptr"><a href="#1-2-2-unique-ptr" class="headerlink" title="1.2.2 unique_ptr"></a>1.2.2 unique_ptr</h3><p>unique_ptr 实现独占式拥有或严格拥有概念，保证同⼀时间内只有⼀个智能指针可以指向该对象。它对于避免资源泄露特别有⽤。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">unique_ptr&lt;string&gt; <span class="title">p3</span> <span class="params">(<span class="keyword">new</span> string (<span class="keyword">auto</span>))</span></span>;<span class="comment">//#4</span></span><br><span class="line">unique_ptr&lt;string&gt; p4；<span class="comment">//#5</span></span><br><span class="line">p4 = p3;<span class="comment">//此时会报错</span></span><br></pre></td></tr></table></figure>
+
+<p>编译器认为p4 = p3非法，避免了p3不再指向有效数据的问题</p>
+<h3 id="1-2-3-shared-ptr"><a href="#1-2-3-shared-ptr" class="headerlink" title="1.2.3  shared_ptr"></a>1.2.3  shared_ptr</h3><p>shared_ptr 实现共享式拥有概念，多个智能指针可以指向相同对象，该对象和其相关资源会在“最后⼀个引⽤被销毁”时候释放。从名字 share 就可以看出了资源可以被多个指针共享，它使⽤计数机制来表明资源被⼏个指针共享。</p>
+<h3 id="1-2-4-weak-ptr"><a href="#1-2-4-weak-ptr" class="headerlink" title="1.2.4 weak_ptr"></a>1.2.4 weak_ptr</h3><p>weak_ptr 是⼀种不控制对象⽣命周期的智能指针，它指向⼀个 shared_ptr 管理的对象。进⾏该对象的内存管理的是那个强引⽤的 shared_ptr</p>
+<p> weak_ptr 只是提供了对管理对象的⼀个访问⼿段。weak_ptr 设计的⽬的是为配合 shared_ptr ⽽引⼊的⼀种智能指针来协助 shared_ptr ⼯作，它只可以从⼀个 shared_ptr 或另⼀个 weak_ptr 对象构造,，它的构造和析构不会引起引⽤记数的增加或减少。</p>
+<h2 id="1-3-C-中内存分配情况"><a href="#1-3-C-中内存分配情况" class="headerlink" title="1.3 C++ 中内存分配情况"></a>1.3 C++ 中内存分配情况</h2><h3 id="1-3-1-C-中内存分配情况"><a href="#1-3-1-C-中内存分配情况" class="headerlink" title="1.3.1 C++ 中内存分配情况"></a>1.3.1 <strong>C++ 中内存分配情况</strong></h3><p><strong>栈：</strong>由编译器管理分配和回收，存放局部变量和函数参数。</p>
+<p><strong>堆：</strong>由程序员管理，需要⼿动 new malloc delete free 进⾏分配和回收，空间较⼤，但可能会出现内存泄漏和空闲碎⽚的情况。</p>
+<p><strong>全局/静态存储区：</strong>分为初始化和未初始化两个相邻区域，存储初始化和未初始化的全局变量和静态变量。</p>
+<p><strong>常量存储区：</strong>存储常量，⼀般不允许修改。</p>
+<p><strong>代码区：</strong>存放程序的⼆进制代码。</p>
+<h3 id="1-3-2-说⼀下C-⾥是怎么定义常量的？常量存放在内存的哪个位置？"><a href="#1-3-2-说⼀下C-⾥是怎么定义常量的？常量存放在内存的哪个位置？" class="headerlink" title="1.3.2 说⼀下C++⾥是怎么定义常量的？常量存放在内存的哪个位置？"></a>1.3.2 说⼀下C++⾥是怎么定义常量的？常量存放在内存的哪个位置？</h3><p>对于局部常量，存放在栈区；</p>
+<p>对于全局常量，编译期⼀般不分配内存，放在符号表中以提⾼访问效率；</p>
+<p>字⾯值常量，⽐如字符串，放在常量区</p>
+<h3 id="1-3-3-new-delete-malloc-free-区别"><a href="#1-3-3-new-delete-malloc-free-区别" class="headerlink" title="1.3.3 new/delete , malloc/free 区别"></a>1.3.3 new/delete , malloc/free 区别</h3><p>都可以⽤来在堆上分配和回收空间。new /delete 是操作符，malloc/free 是库函数。</p>
+<p><strong>执⾏</strong> <strong>new</strong> <strong>实际上执⾏两个过程</strong>：1.分配未初始化的内存空间（malloc）；2.使⽤对象的构造函数对空间进⾏初始</p>
+<p>化；返回空间的⾸地址。如果在第⼀步分配空间中出现问题，则抛出 std::bad_alloc 异常，或被某个设定的异常处</p>
+<p>理函数捕获处理；如果在第⼆步构造对象时出现异常，则⾃动调⽤ delete 释放内存。</p>
+<p><strong>执⾏</strong> <strong>delete</strong> <strong>实际上也有两个过程</strong>：1. 使⽤析构函数对对象进⾏析构；2.回收内存空间（free）。</p>
+<p>以上也可以看出 new 和 malloc 的区别，new 得到的是经过初始化的空间，⽽ malloc 得到的是未初始化的空间。</p>
+<p>所以 new 是 new ⼀个类型，⽽ malloc 则是malloc ⼀个字节⻓度的空间。delete 和 free 同理，delete 不仅释放</p>
+<p>空间还析构对象，delete ⼀个类型，free ⼀个字节⻓度的空间。</p>
+<p><strong>为什么有了</strong> <strong>malloc／free</strong> 还需要 <strong>new／delete</strong>？**因为对于⾮内部数据类型⽽⾔，光⽤ malloc／free ⽆法满⾜动</p>
+<p>态对象的要求。对象在创建的同时需要⾃动执⾏构造函数，对象在消亡以前要⾃动执⾏析构函数。由于 malloc／</p>
+<p>free 是库函数⽽不是运算符，不在编译器控制权限之内，不能够把执⾏的构造函数和析构函数的任务强加于</p>
+<p>malloc／free，所以有了 new／delete 操作符。</p>
+<h2 id="1-4-C-与其他语言的区别"><a href="#1-4-C-与其他语言的区别" class="headerlink" title="1.4 C++与其他语言的区别"></a>1.4 C++与其他语言的区别</h2><h3 id="1-4-1-C-与C的区别"><a href="#1-4-1-C-与C的区别" class="headerlink" title="1.4.1 C++与C的区别"></a>1.4.1 C++与C的区别</h3><p>⾸先，C 和 C++ 在基本语句上没有过⼤的区别。</p>
+<p>C++ 有新增的<strong>语法和关键字</strong>，语法的区别有头⽂件的不同和命名空间的不同，C++ 允许我们⾃⼰定义⾃⼰的空间，C 中不可以。关键字⽅⾯⽐如 C++ 与 C 动态管理内存的⽅式不同，C++ 中在 malloc 和 free 的基础上增加了 new 和 delete，⽽且 C++ 中在指针的基础上增加了引⽤的概念，关键字例如 C++中还增加了 auto，explicit 体现显示和隐式转换上的概念要求，还有 dynamic_cast 增加类型安全⽅⾯的内容。</p>
+<p><strong>函数⽅⾯</strong> <strong>C++</strong> <strong>中有重载和虚函数的概念</strong>：C++ ⽀持函数᯿载⽽ C 不⽀持，是因为 C++ 函数的名字修饰与 C 不同，C++ 函数名字的修饰会将参数加在后⾯，例如，int func(int,double)经过名字修饰之后会变成_func_int_double， ⽽ C 中则会变成 _func，所以 C++ 中会⽀持不同参数调⽤不同函数。</p>
+<p><strong>C++</strong> <strong>还有虚函数概念，⽤以实现多态。</strong></p>
+<p>类⽅⾯，C <strong>的</strong> <strong>struct</strong> <strong>和</strong> <strong>C++</strong> <strong>的类也有很⼤不同</strong>：C++ 中的 struct 不仅可以有成员变ᰁ还可以成员函数，⽽且对于 struct 增加了权限访问的概念，struct 的默认成员访问权限和默认继承权限都是 public，C++ 中除了 struct 还有 class 表示类，struct 和 class 还有⼀点不同在于 class 的默认成员访问权限和默认继承权限都是 private。</p>
+<p><strong>C++</strong> <strong>中增加了模板还᯿⽤代码，提供了更加强⼤的</strong> <strong>STL</strong> <strong>标准库。</strong></p>
+<p>最后补充⼀点就是 C 是⼀种结构化的语⾔，᯿点在于算法和数据结构。C 程序的设计⾸先考虑的是如何通过⼀个代码，⼀个过程对输⼊进⾏运算处理输出。⽽ C++ ⾸先考虑的是如何构造⼀个对象模型，让这个模型能够契合与之对应的问题领域，这样就能通过获取对象的状态信息得到输出。</p>
+<h3 id="1-4-2-C-与JAVA的区别"><a href="#1-4-2-C-与JAVA的区别" class="headerlink" title="1.4.2 C++与JAVA的区别"></a>1.4.2 C++与JAVA的区别</h3><p><strong>指针：</strong>Java 语⾔让程序员没法找到指针来直接访问内存，没有指针的概念，并有内存的⾃动管理功能，从⽽有效的</p>
+<p>防⽌了 C++ 语⾔中的指针操作失误的影响。但并⾮ Java 中没有指针，Java 虚拟机内部中还是⽤了指针，保证了</p>
+<p>Java 程序的安全。</p>
+<p><strong>多᯿继承：</strong>C++ ⽀持多᯿继承但 Java 不⽀持，但⽀持⼀个类继承多个接⼝，实现 C++ 中多᯿继承的功能，⼜避免</p>
+<p>了 C++ 的多᯿继承带来的不便。</p>
+<p><strong>数据类型和类：</strong>Java 是完全⾯向对象的语⾔，所有的函数和变ᰁ必须是类的⼀部分。除了基本数据类型之外，其余</p>
+<p>的都作为类对象，对象将数据和⽅法结合起来，把它们封装在类中，这样每个对象都可以实现⾃⼰的特点和⾏为。</p>
+<p>Java 中取消了 C++ 中的 struct 和 union 。</p>
+<p><strong>⾃动内存管理：</strong>Java 程序中所有对象都是⽤ new 操作符建⽴在内存堆栈上，Java ⾃动进⾏⽆⽤内存回收操作，不</p>
+<p>需要程序员进⾏⼿动删除。⽽ C++ 中必须由程序员释放内存资源，增加了程序设计者的负担。Java 中当⼀个对象</p>
+<p>不再被⽤到时， ⽆⽤内存回收器将给他们加上标签。Java ⾥⽆⽤内存回收程序是以线程⽅式在后台运⾏的，利⽤</p>
+<p>空闲时间⼯作来删除。</p>
+<p>Java 不⽀持操作符᯿载。操作符᯿载被认为是 C++ 的突出特性。</p>
+<p>Java 不⽀持预处理功能。C++ 在编译过程中都有⼀个预编译阶段，Java 没有预处理器，但它提供了 import 与 C++</p>
+<p>预处理器具有类似功能。</p>
+<p><strong>类型转换：</strong>C++ 中有数据类型隐含转换的机制，Java 中需要限时强制类型转换。</p>
+<h2 id="1-5-C-的四种强制转换"><a href="#1-5-C-的四种强制转换" class="headerlink" title="1.5 C++的四种强制转换"></a>1.5 C++的四种强制转换</h2><p><strong>static_cast：</strong>明确指出类型转换，⼀般建议将隐式转换都替换成显示转换，因为没有动态类型检查，上⾏转换（派⽣类-&gt;基类）安全，下⾏转换（基类-&gt;派⽣类） 不安全，所以主要执⾏⾮多态的转换操作；</p>
+<p><strong>dynamic_cast：</strong>专⻔⽤于派⽣类之间的转换，type-id 必须是类指针，类引⽤或 void*，对于下⾏转换是安全的，当类型不⼀致时，转换过来的是空指针，⽽static_cast，当类型不⼀致时，转换过来的事错误意义的指针，可能造成⾮法访问等问题。</p>
+<p><strong>const_cast：</strong>专⻔⽤于 const 属性的转换，去除 const 性质，或增加 const 性质， 是四个转换符中唯⼀⼀个可以操作常量的转换符。</p>
+<p><strong>reinterpret_cast：</strong>不到万不得已，不要使⽤这个转换符，⾼危操作。使⽤特点： 从底层对数据进⾏重新解释，依赖具体的平台，可移植性差； 可以将整形转 换为指针，也可以把指针转换为数组；可以在指针和引⽤之间进⾏肆⽆忌惮的转换。</p>
+<h2 id="1-6-指针"><a href="#1-6-指针" class="headerlink" title="1.6 指针"></a>1.6 指针</h2><h3 id="1-6-1-指针和引用的区别"><a href="#1-6-1-指针和引用的区别" class="headerlink" title="1.6.1 指针和引用的区别"></a>1.6.1 指针和引用的区别</h3><h3 id="1-6-2-野指针与悬空指针有什么区别？如何避免？"><a href="#1-6-2-野指针与悬空指针有什么区别？如何避免？" class="headerlink" title="1.6.2 野指针与悬空指针有什么区别？如何避免？"></a>1.6.2 野指针与悬空指针有什么区别？如何避免？</h3><h3 id="1-6-3-函数指针"><a href="#1-6-3-函数指针" class="headerlink" title="1.6.3 函数指针"></a>1.6.3 函数指针</h3><p>⾸先是定义：函数指针是指向函数的指针变量。函数指针本身⾸先是⼀个指针变量，该指针变量指向⼀个具体的函数。这正如⽤指针变量可指向整型变量、字符型、数组⼀样，这⾥是指向函数。</p>
+<p>在编译时，每⼀个函数都有⼀个⼊⼝地址，该⼊⼝地址就是函数指针所指向的地址。有了指向函数的指针变量后，可⽤该指针变量调⽤函数，就如同⽤指针变量可引⽤其他类型变量⼀样，在这些概念上是⼤体⼀致的。</p>
+<p>其次是⽤途：调⽤函数和做函数的参数，⽐如回调函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">char</span> * <span class="title">fun</span><span class="params">(<span class="type">char</span> * p)</span> </span>&#123;…&#125; <span class="comment">// 函数fun</span></span><br><span class="line"><span class="type">char</span> * (*pf)(<span class="type">char</span> * p); <span class="comment">// 函数指针pf</span></span><br><span class="line">pf = fun; <span class="comment">// 函数指针pf指向函数fun</span></span><br><span class="line"><span class="built_in">pf</span>(p); <span class="comment">// 通过函数指针pf调⽤函数fun</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-7-虚函数相关"><a href="#1-7-虚函数相关" class="headerlink" title="1.7 虚函数相关"></a>1.7 虚函数相关</h2><h3 id="1-7-1-虚函数相关（虚函数表，虚函数指针），虚函数的实现原理"><a href="#1-7-1-虚函数相关（虚函数表，虚函数指针），虚函数的实现原理" class="headerlink" title="1.7.1 虚函数相关（虚函数表，虚函数指针），虚函数的实现原理"></a>1.7.1 虚函数相关（虚函数表，虚函数指针），虚函数的实现原理</h3><p>⾸先我们来说⼀下，C++中多态的表象，在基类的函数前加上 virtual 关键字，在派⽣类中重写该函数，运⾏时将会根据对象的实际类型来调⽤相应的函数。如果对象类型是派⽣类，就调⽤派⽣类的函数，如果是基类，就调⽤基类的函数。</p>
+<p>实际上，当⼀个类中包含虚函数时，编译器会为该类⽣成⼀个虚函数表，保存该类中虚函数的地址，同样，派⽣类继承基类，派⽣类中⾃然⼀定有虚函数，所以编译器也会为派⽣类⽣成⾃⼰的虚函数表。当我们定义⼀个派⽣类对象时，编译器检测该类型有虚函数，所以为这个派⽣类对象⽣成⼀个虚函数指针，指向该类型的虚函数表，这个虚函数指针的初始化是在构造函数中完成的。</p>
+<p>后续如果有⼀个基类类型的指针，指向派⽣类，那么当调⽤虚函数时，就会根据所指真正对象的虚函数表指针去寻</p>
+<p>找虚函数的地址，也就可以调⽤派⽣类的虚函数表中的虚函数以此实现多态。</p>
+<h2 id="1-8-C-中重载和重写、重定义的区别"><a href="#1-8-C-中重载和重写、重定义的区别" class="headerlink" title="1.8 C++中重载和重写、重定义的区别"></a>1.8 C++中重载和重写、重定义的区别</h2><h2 id="1-9-介绍-C-所有的构造函数"><a href="#1-9-介绍-C-所有的构造函数" class="headerlink" title="1.9 介绍 C++ 所有的构造函数"></a>1.9 <strong>介绍</strong> <strong>C++</strong> 所有的构造函数</h2><p>类的对象被创建时，编译系统为对象分配内存空间，并⾃动调⽤构造函数，由构造函数完成成员的初始化⼯作。</p>
+<p>即构造函数的作⽤：初始化对象的数据成员。</p>
+<p><strong>⽆参数构造函数：</strong>即默认构造函数，如果没有明确写出⽆参数构造函数，编译器会⾃动⽣成默认的⽆参数构造函数，函数为空，什么也不做，如果不想使⽤⾃动⽣成的⽆参构造函数，必需要⾃⼰显示写出⼀个⽆参构造函数。</p>
+<p><strong>⼀般构造函数：</strong>也称重载构造函数，⼀般构造函数可以有各种参数形式，⼀个类可以有多个⼀般构造函数，前提是参数的个数或者类型不同，创建对象时根据传⼊参数不同调⽤不同的构造函数。</p>
+<p><strong>拷⻉构造函数：</strong>拷⻉构造函数的函数参数为对象本身的引⽤，⽤于根据⼀个已存在的对象复制出⼀个新的该类的对象，⼀般在函数中会将已存在的对象的数据成员的值⼀⼀复制到新创建的对象中。如果没有显示的写拷⻉构造函数，则系统会默认创建⼀个拷⻉构造函数，但当类中有指针成员时，最好不要使⽤编译器提供的默认的拷⻉构造函数，最好⾃⼰定义并且在函数中执⾏深拷⻉。</p>
+<p><strong>类型转换构造函数：</strong>根据⼀个指定类型的对象创建⼀个本类的对象，也可以算是⼀般构造函数的⼀种，这⾥提出来，是想说有的时候不允许默认转换的话，要记得将其声明为 explict 的，来阻⽌⼀些隐式转换的发⽣。</p>
+<p><strong>赋值运算符的重载</strong>：注意，这个类似拷⻉构造函数，将＝右边的本类对象的值复制给＝左边的对象，它不属于构造函数，＝左右两边的对象必需已经被创建。如果没有显示的写赋值运算符的重载，系统也会⽣成默认的赋值运算符，做⼀些基本的拷⻉⼯作。</p>
+<h2 id="1-10-面向对象的三大特性"><a href="#1-10-面向对象的三大特性" class="headerlink" title="1.10 面向对象的三大特性"></a>1.10 面向对象的三大特性</h2><h3 id="1-10-1-封装"><a href="#1-10-1-封装" class="headerlink" title="1.10.1 封装"></a>1.10.1 封装</h3><p>就是把客观事物封装成抽象的类，并且类可以把⾃⼰的数据和⽅法只让信任的类或者对象操作，对不可信的进⾏信息隐藏。⼀个类就是⼀个封装了数据以及操作这些数据的代码的逻辑实体。在⼀个对象内部，某些代码或某些数据可以是私有的，不能被外界访问。通过这种⽅式，对象对内部数据提供了不同级别的保护，以防⽌程序中⽆关的部分意外的改变或错误的使⽤了对象的私有部分。</p>
+<h3 id="1-10-2-继承"><a href="#1-10-2-继承" class="headerlink" title="1.10.2 继承"></a>1.10.2 继承</h3><p>是指可以让某个类型的对象获得另⼀个类型的对象的属性的⽅法。它⽀持按级分类的概念。继承是指这样⼀种能⼒：它可以使⽤现有类的所有功能，并在⽆需᯿新编写原来的类的情况下对这些功能进⾏扩展。通过继承创建的新类称为“⼦类”或者“派⽣类”，被继承的类称为“基类”、“⽗类”或“超类”。继承的过程，就是从⼀般到特殊的过程。要实现继承，可以通过“继承”和“组合”来实现。</p>
+<p>继承概念的实现⽅式有两类：</p>
+<p><strong>实现继承：</strong>实现继承是指直接使⽤基类的属性和⽅法⽽⽆需额外编码的能⼒。</p>
+<p><strong>接⼝继承：</strong>接口继承是指仅使⽤属性和⽅法的名称、但是⼦类必需提供实现的能⼒</p>
+<h3 id="1-10-3-多态"><a href="#1-10-3-多态" class="headerlink" title="1.10.3 多态"></a>1.10.3 多态</h3><p>就是向不同的对象发送同⼀个消息，不同对象在接收时会产⽣不同的⾏为（即⽅法）。即⼀个接⼝，可以实现多种⽅法。</p>
+<p>多态与⾮多态的实质区别就是函数地址是早绑定还是晚绑定的。如果函数的调⽤，在编译器编译期间就可以确定函数的调⽤地址，并产⽣代码，则是静态的，即地址早绑定。⽽如果函数调⽤的地址不能在编译器期间确定，需要在运⾏时才确定，这就属于晚绑定。</p>
+<h3 id="1-10-4-多态的实现"><a href="#1-10-4-多态的实现" class="headerlink" title="1.10.4 多态的实现"></a>1.10.4 多态的实现</h3><p>多态其实⼀般就是指<strong>继承加虚函数实现的多态</strong>，对于᯿载来说，实际上基于的原理是，编译器为函数⽣成符号表时的不同规则，᯿载只是⼀种语⾔特性，与多态⽆关，与⾯向对象也⽆关，但这⼜是 C++中增加的新规则，所以也算属于 C++，所以如果⾮要说᯿载算是多态的⼀种，那就可以说：<strong>多态可以分为静态多态和动态多态。</strong></p>
+<p>静态多态其实就是᯿载，因为静态多态是指在编译时期就决定了调⽤哪个函数，根据参数列表来决定；</p>
+<p>动态多态是指通过⼦类᯿写⽗类的虚函数来实现的，因为是在运⾏期间决定调⽤的函数，所以称为动态多态，</p>
+<p>⼀般情况下我们不区分这两个时所说的多态就是指动态多态。</p>
+<p>动态多态的实现与虚函数表，虚函数指针相关。</p>
+
         </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/Codeing/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">数据结构与算法</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
     </div>
 </div>
 
@@ -171,6 +358,23 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -217,6 +421,14 @@
     </div>
 
     
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-text">1.1 关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-static"><span class="nav-text">1.1.1 static</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-const"><span class="nav-text">1.1.2 const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-volatile"><span class="nav-text">1.1.3 volatile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-4-extern"><span class="nav-text">1.1.4 extern</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-5-define"><span class="nav-text">1.1.5 define</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-7-define%E5%92%8Cconst%E5%8C%BA%E5%88%AB"><span class="nav-text">1.1.7 define和const区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-text">1.2 智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-auto-ptr"><span class="nav-text">1.2.1 auto_ptr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-unique-ptr"><span class="nav-text">1.2.2 unique_ptr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-shared-ptr"><span class="nav-text">1.2.3  shared_ptr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-weak-ptr"><span class="nav-text">1.2.4 weak_ptr</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-C-%E4%B8%AD%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%83%85%E5%86%B5"><span class="nav-text">1.3 C++ 中内存分配情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-C-%E4%B8%AD%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%83%85%E5%86%B5"><span class="nav-text">1.3.1 C++ 中内存分配情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-%E8%AF%B4%E2%BC%80%E4%B8%8BC-%E2%BE%A5%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F%E7%9A%84%EF%BC%9F%E5%B8%B8%E9%87%8F%E5%AD%98%E6%94%BE%E5%9C%A8%E5%86%85%E5%AD%98%E7%9A%84%E5%93%AA%E4%B8%AA%E4%BD%8D%E7%BD%AE%EF%BC%9F"><span class="nav-text">1.3.2 说⼀下C++⾥是怎么定义常量的？常量存放在内存的哪个位置？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-new-delete-malloc-free-%E5%8C%BA%E5%88%AB"><span class="nav-text">1.3.3 new&#x2F;delete , malloc&#x2F;free 区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-C-%E4%B8%8E%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">1.4 C++与其他语言的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-C-%E4%B8%8EC%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">1.4.1 C++与C的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-C-%E4%B8%8EJAVA%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">1.4.2 C++与JAVA的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-C-%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="nav-text">1.5 C++的四种强制转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-%E6%8C%87%E9%92%88"><span class="nav-text">1.6 指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-1-%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">1.6.1 指针和引用的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-2-%E9%87%8E%E6%8C%87%E9%92%88%E4%B8%8E%E6%82%AC%E7%A9%BA%E6%8C%87%E9%92%88%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%EF%BC%9F"><span class="nav-text">1.6.2 野指针与悬空指针有什么区别？如何避免？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-3-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="nav-text">1.6.3 函数指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-%E8%99%9A%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3"><span class="nav-text">1.7 虚函数相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-1-%E8%99%9A%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3%EF%BC%88%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%EF%BC%8C%E8%99%9A%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%EF%BC%89%EF%BC%8C%E8%99%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-text">1.7.1 虚函数相关（虚函数表，虚函数指针），虚函数的实现原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-C-%E4%B8%AD%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E3%80%81%E9%87%8D%E5%AE%9A%E4%B9%89%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">1.8 C++中重载和重写、重定义的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-%E4%BB%8B%E7%BB%8D-C-%E6%89%80%E6%9C%89%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-text">1.9 介绍 C++ 所有的构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7"><span class="nav-text">1.10 面向对象的三大特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-1-%E5%B0%81%E8%A3%85"><span class="nav-text">1.10.1 封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-2-%E7%BB%A7%E6%89%BF"><span class="nav-text">1.10.2 继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-3-%E5%A4%9A%E6%80%81"><span class="nav-text">1.10.3 多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-4-%E5%A4%9A%E6%80%81%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-text">1.10.4 多态的实现</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
 
     <div class="image-viewer-container">
     <img src="">
@@ -248,6 +460,14 @@
 
 
 <div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
     
 </div>
 
