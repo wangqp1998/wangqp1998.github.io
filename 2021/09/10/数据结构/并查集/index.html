@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="王秋鹏">
+    
+    <title>
+        
+            C++总结 |
+        
+        wangqp
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                wangqp
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/home"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/2021/09/10/c/"
+                            >
+                                C++
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/2021/09/10/Codeing/"
+                            >
+                                数据结构与算法
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/home">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/2021/09/10/c/">C++</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/2021/09/10/Codeing/">数据结构与算法</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">C++总结</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">王秋鹏</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-09-10 00:00:00</span>
+        <span class="mobile">2021-09-10 00:00</span>
+    </span>
+    
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="1-概论"><a href="#1-概论" class="headerlink" title="1. 概论"></a>1. 概论</h3><p>定义：<br>并查集是一种树型的数据结构，用于处理一些不相交集合的合并及查询问题（即所谓的并、查）。比如说，我们可以用并查集来判断一个森林中有几棵树、某个节点是否属于某棵树等。</p>
+<p>主要构成<br>并查集主要由一个整型<a class="link"   target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B0%E7%BB%84&spm=1001.2101.3001.7020" >数组<i class="fas fa-external-link-alt"></i></a>pre[ ]和两个函数find( )、join( )构成。<br>数组 pre[ ] 记录了每个点的前驱节点是谁，函数 find(x) 用于查找指定节点 x 属于哪个集合，函数 join(x,y) 用于合并两个节点 x 和 y 。</p>
+<p>作用：<br>并查集的主要作用是求连通分支数（如果一个图中所有点都存在可达关系（直接或间接相连），则此图的连通分支数为1；如果此图有两大<a class="link"   target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%AD%90%E5%9B%BE&spm=1001.2101.3001.7020" >子图<i class="fas fa-external-link-alt"></i></a>各自全部可达，则此图的连通分支数为2……）</p>
+<hr>
+<h3 id="2-并查集的现实意义"><a href="#2-并查集的现实意义" class="headerlink" title="2. 并查集的现实意义"></a>2. 并查集的现实意义</h3><p>故事引入：<br>话说在江湖中散落着各式各样的大侠，他们怀揣着各自的理想和信仰在江湖中奔波。或是追求武林至尊，或是远离红尘，或是居庙堂之高，或是处江湖之远。尽管大多数人都安分地在做自己，但总有些人会因为彼此的信仰不同而聚众斗殴。因此，江湖上常年乱作一团，纷纷扰扰。<br>这样长期的混战，难免会打错人，说不定一刀就把拥有和自己相同信仰的队友给杀了。这该如何是好呢？于是，那些有着相同信仰的人们便聚在一起，进而形成了各种各样的门派，比如我们所熟知的“华山派”、“峨嵋派”、“,崆峒派”、“少林寺”、“明教”……这样一来，那些有着相同信仰的人们便聚在一起成为了朋友。以后再遇到要打架的事时，就不会打错人了。<br><img src="https://img-blog.csdnimg.cn/20210222021354732.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9aRUQ=,size_16,color_FFFFFF,t_70" alt="江湖门派"><br>但是新的问题又来了，原本互不相识的两个人如何辨别是否共属同一门派呢?<br>这好办！我们可以先在门派中选举一个“大哥”作为话事人（也就是掌门人，或称教主等）。这样一来，每当要打架的时候，决斗双方先自报家门，说出自己所在门派的教主名称，如果名称相同，就说明是自己人，就不必自相残杀了，否则才能进行决斗。于是，教主下令将整个门派划分为三六九等，使得整个门派内部形成一个严格的等级制度（即树形结构）。教主就是根节点，下面分别是二级、三级、……、N级队员。每个人只需要记住自己的上级名称，以后遇到需要辨别敌友的情况时，只需要一层层往上询问（网上询问）就能知道是否是同道中人了。<br><img src="https://img-blog.csdnimg.cn/20210222021354815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9aRUQ=,size_16,color_FFFFFF,t_70" alt="等级划分"><br>数据结构的角度来看：<br>由于我们的重点是在关注两个人是否连通，因此他们具体是如何连通的，内部结构是怎样的，甚至根节点是哪个（即教主是谁），都不重要。所以并查集在初始化时，教主可以随意选择（就不必再搞什么武林大会了），只要能分清敌友关系就行。</p>
+<p>备注：上面所说的“教主”在教材中被称为“代表元”。<br>即：用集合中的某个元素来代表这个集合，则该元素称为此集合的代表元。</p>
+<hr>
+<h3 id="3-find-函数的定义与实现"><a href="#3-find-函数的定义与实现" class="headerlink" title="3. find( )函数的定义与实现"></a>3. find( )函数的定义与实现</h3><p>故事引入：<br>子夜，小昭于骊山下快马送信，发现一头戴竹笠之人立于前方，其形似黑蝠，倒挂于树前，甚惧，正系拔剑之时，只听四周悠悠传来：“如此夜深，姑凉竟敢擅闯明教，何不下坐陪我喝上一盅？”。小昭听闻，后觉此人乃明教四大护法之一的青翼蝠王韦一笑，答道：“在下小昭，乃紫衫龙王之女”。蝠王轻惕，急问道：“尔等既为龙王之女，故同为明教中人。敢问阁下教主大名，若非本教中人，于明教之地肆意走动那可是死罪！”。小昭吓得赶紧打了个电话问龙王：“龙王啊，咱教主叫啥名字来着？”，龙王答道：“吾教主乃张无忌也！”，小昭遂答蝠王：“张无忌！”。蝠王听后，抱拳请礼以让之。<br>在上面的情境中，小昭向他的上级（紫衫龙王）请示教主名称，龙王在得到申请后也向他的上级（张无忌）请示教主名称，此时由于张无忌就是教主，因此他直接反馈给龙王教主名称是“张无忌”。同理，青翼蝠王也经历了这一请示过程。<br>在并查集中，用于查询各自的教主名字的函数就是我们的find()函数。find(x)的作用是用于查找某个人所在门派的教主，换言之就是用于对某个给定的点x，返回其所属集合的代表。</p>
+<p>实现：<br>首先我们需要定义一个数组：int pre[1000]; （数组长度依题意而定）。这个数组记录了每个人的上级是谁。这些人从0或1开始编号（依题意而定）。比如说pre[16]=6就表示16号的上级是6号。如果一个人的上级就是他自己，那说明他就是教主了，查找到此结束。也有孤家寡人自成一派的，比如欧阳锋，那么他的上级就是他自己。<br>每个人都只认自己的上级。比如小昭只知道自己的上级是紫衫龙王。教主是谁？不认识！要想知道自己教主的名称，只能一级级查上去。因此你可以视find(x)这个函数就是找教主用的。<br>下面给出这个函数的具体实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int find(int x)//查找x的教主</span><br><span class="line">&#123;</span><br><span class="line">while(pre[x] != x)//如果x的上级不是自己（则说明找到的人不是教主）</span><br><span class="line">x = pre[x];//x继续找他的上级，直到找到教主为止</span><br><span class="line">return x;//教主驾到~~~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-join-函数的定义与实现"><a href="#4-join-函数的定义与实现" class="headerlink" title="4. join( )函数的定义与实现"></a>4. join( )函数的定义与实现</h3><p>故事引入：<br>虚竹和周芷若是我个人非常喜欢的两个人物，他们的教主分别是玄慈方丈和灭绝师太，但是显然这两个人属于不同门派，但是我又不想看到他们打架。于是，我就去问了下玄慈和灭绝：“你看你们俩都没头发，要不就做朋友吧”。他们俩看在我的面子上同意了，这一同意非同小可，它直接换来了少林和峨眉的永世和平。</p>
+<p>实现：<br>在上面的情景中，两个已存的不同门派就这样完成了合并。这么重大的变化，要如何实现？要改动多少地方？其实很简单，我对玄慈方丈说：“大师，麻烦你把你的上级改为灭绝师太吧。这样一来，两派原先所有人员的教主就都变成了师太，于是下面的人们也就不会打起来了！反正我们关心的只是连通性，门派内部的结构不要紧的”。玄慈听后立刻就不乐意了：“我靠，凭什么是我变成她手下呀，怎么不反过来？我抗议！”。抗议无效，我安排的，最大。反正谁加入谁效果是一样的，我就随手指定了一个，join()函数的作用就是用来实现这个的。</p>
+<p>join(x,y)的执行逻辑如下：<br>1、寻找 x 的代表元（即教主）；<br>2、寻找 y 的代表元（即教主）；<br>3、如果 x 和 y 不相等，则随便选一个人作为另一个人的上级，如此一来就完成了 x 和 y 的合并。<br>下面给出这个函数的具体实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void join(int x,int y)                     //我想让虚竹和周芷若做朋友</span><br><span class="line">&#123;</span><br><span class="line">    int fx=find(x), fy=find(y);            //虚竹的老大是玄慈，芷若MM的老大是灭绝</span><br><span class="line">    if(fx != fy)                           //玄慈和灭绝显然不是同一个人</span><br><span class="line">        pre[fx]=fy;                        //方丈只好委委屈屈地当了师太的手下啦</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="5-路径压缩算法之一（优化find-函数）"><a href="#5-路径压缩算法之一（优化find-函数）" class="headerlink" title="5. 路径压缩算法之一（优化find( )函数）"></a>5. 路径压缩算法之一（优化find( )函数）</h3><p>问题引入：<br>前面介绍的 join(x,y) 实际上为我们提供了一个将不同节点进行合并的方法。通常情况下，我们可以结合着循环来将给定的大量数据合并成为若干个更大的集合（即并查集）。但是问题也随之产生，我们来看这段代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if(fx != fy)  </span><br><span class="line">pre[fx]=fy;</span><br></pre></td></tr></table></figure>
+
+<p>这里并没有明确谁是谁的前驱（上级）的规则，而是我直接指定后面的数据作为前面数据的前驱（上级）。那么这样就导致了最终的树状结构无法预计，即有可能是良好的 n 叉树，也有可能是单支树结构（一字长蛇形）。试想，如果最后真的形成单支树结构，那么它的效率就会及其低下（树的深度过深，那么查询过程就必然耗时）。<br>而我们最理想的情况就是所有人的直接上级都是教主，这样一来整个树的结构就只有两级，此时查询教主只需要一次。因此，这就产生了路径压缩算法。<br>设想这样一个场景：两个互不相识的大将夏侯惇和许褚碰面了，他们都互相看不惯，想揍对方。于是按照江湖规矩，先打电话问自己的上级：“你是不是教主？” 上级说：“我不是呀，我的上级是***，我帮你问一下。” 就这样两个人一路问下去，直到最终发现他们的教主都是曹操。具体结构如下：<br><img src="https://img-blog.csdnimg.cn/20210219181523922.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9aRUQ=,size_16,color_FFFFFF,t_70" alt="找掌门人"><br>“失礼失礼，原来是自己人，在下军机处前将军夏侯惇!”<br>“幸会幸会，不打不相识嘛，在下军情处上将许褚！”<br>紧接着，两人便高高兴兴地手拉手喝酒去了。<br>“等等等等，两位同学请留步，还有事情没完成呢！”我叫住他俩：“还要做路径压缩！”<br>两人醒悟，夏侯惇赶紧打电话给他的上级郭嘉：“军师啊，我查过了，我们的教主都是曹丞相。不如我们直接拜在丞相手下吧，省得级别太低，以后找起来太麻烦。”郭嘉答道：“所言甚是” 。<br>许褚接着也打电话给刚才拜访过的荀彧，做了同样的事。于是此时，整个曹操阵营的结构如下所示：<br><img src="https://img-blog.csdnimg.cn/20210219181523911.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9aRUQ=,size_16,color_FFFFFF,t_70" alt="路径压缩"><br>这样一来，在刚才查询过程中涉及到的人物就都聚集在了曹操的直接领导下，以后再需要查询教主名称的时候，就只需要询问一级便可得到。所以，在经过一次查询后，整个门派树的高度都将大大降低，路径压缩所实现的功能就是这么个意思。</p>
+<p>实现：<br>从上面的查询过程中不难看出，当从某个节点出发去寻找它的根节点时，我们会途径一系列的节点（比如上面的例子中，从夏侯惇→郭嘉→曹植→曹操），在这些节点中，除了根节点外（即曹操），其余所有节点（即夏侯惇、郭嘉、曹植）都需要更改直接前驱为曹操。<br>因此，基于这样的思路，我们可以通过递归的方法来逐层修改返回时的某个节点的直接前驱（即pre[x]的值）。简单说来就是将x到根节点路径上的所有点的pre（上级）都设为根节点。下面给出具体的实现代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int find(int x)     //查找结点 x的根结点 </span><br><span class="line">&#123;</span><br><span class="line">    if(pre[x] == x) return x;//递归出口：x的上级为 x本身，即 x为根结点        </span><br><span class="line">    return pre[x] = find(pre[x]);//此代码相当于先找到根结点 rootx，然后pre[x]=rootx </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该算法存在一个缺陷：只有当查找了某个节点的代表元（教主）后，才能对该查找路径上的各节点进行路径压缩。换言之，第一次执行查找操作的时候是实现没有压缩效果的，只有在之后才有效。</p>
+<hr>
+<h3 id="6-路径压缩算法之二（加权标记法）"><a href="#6-路径压缩算法之二（加权标记法）" class="headerlink" title="6. 路径压缩算法之二（加权标记法）"></a>6. 路径压缩算法之二（加权标记法）</h3><p>备注：<br>不要一看到“加权标记”这种比较高大上的名词就害怕，其实他也是属于路径压缩算法，不同的是其思想更加高级（更不容易想到）罢了。不过我还是说一下，掌握了前面几点内容就能应对绝大多数ACM问题，下面的“加权标记法”供有兴趣的同学学习交流。</p>
+<p>主要思路：<br>加权标记法需要将树中所有节点都增设一个权值，用以表示该节点所在树中的高度（比如用rank[x]=3表示 x 节点所在树的高度为3）。这样一来，在合并操作的时候就能通过这个权值的大小来决定谁当谁的上级（玄慈哭了：“正义终会来到，但永不会缺席”）。<br>在合并操作的时候，假设需要合并的两个集合的代表元（教主）分别为 x 和 y，则只需要令pre[x] = y 或者pre[y] = x 即可。但我们为了使合并后的树不产生退化（即：使树中左右子树的深度差尽可能小），那么对于每一个元素 x ，增设一个rank[x]数组，用以表达子树 x 的高度。在合并时，如果rank[x] &lt; rank[y]，则令pre[x] = y；否则令pre[y] = x。<br>举个例子，我们对以A，F为代表元的集合进行合并操作（如下图所示）：<br><img src="https://img-blog.csdnimg.cn/20210222022013234.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9aRUQ=,size_16,color_FFFFFF,t_70" alt="路径压缩"><br>由于rank(A) &gt; rank(F) ，因此令pre[F]= A。合并后的图形如下图所示：<br><img src="https://img-blog.csdnimg.cn/20210222022013189.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9aRUQ=,size_16,color_FFFFFF,t_70" alt="路径压缩"><br>可以看出，合并前两个树的最大高度为3，合并后依然是3，这也就达到了我们的目的。但如果令pre[A]= F，那么就会使得合并后的树的总高度增加，这里我就不上图了，同学们不信可以自己画出来看看。<br>我们常说，鱼和熊掌不可兼得，同理，时间复杂度和空间复杂度也很难兼得。由于给每个节点都增加了一个权值来标记其在树中的高度，这也就意味着需要额外的数据结构来存放权重信息，所以这将导致额外的空间开销。</p>
+<p>实现：<br>加权标记法的核心在于对rank数组的逻辑控制，其主要的情况有：<br>1、如果rank[x] &lt; rank[y]，则令pre[x] = y；<br>2、如果rank[x] == rank[y]，则可任意指定上级；<br>3、如果rank[x] &gt; rank[y]，则令pre[y] = x；<br>在实际写代码时，为了使代码尽可能简洁，我们可以将第1点单独作为一个逻辑选择，然后将2、3点作为另一个选择（反正第2点任意指定上级嘛），所以具体的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void union(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    x=find(x);//寻找 x的代表元</span><br><span class="line">    y=find(y);//寻找 y的代表元</span><br><span class="line">    if(x==y) return ;//如果 x和 y的代表元一致，说明他们共属同一集合，则不需要合并，直接返回；否则，执行下面的逻辑</span><br><span class="line">    if(rank[x]&gt;rank[y]) pre[y]=x;//如果 x的高度大于 y，则令 y的上级为 x</span><br><span class="line">    else//否则</span><br><span class="line">    &#123;</span><br><span class="line">        if(rank[x]==rank[y]) rank[y]++;//如果 x的高度和 y的高度相同，则令 y的高度加1</span><br><span class="line">        pre[x]=y;//让 x的上级为 y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h3><p>1、用集合中的某个元素来代表这个集合，则该元素称为此集合的代表元；<br>2 、一个集合内的所有元素组织成以代表元为根的树形结构；<br>3 、对于每一个元素 x，pre[x] 存放 x 在树形结构中的父亲节点（如果 x 是根节点，则令pre[x] = x）；<br>4 、对于查找操作，假设需要确定 x 所在的的集合，也就是确定集合的代表元。可以沿着pre[x]不断在树形结构中向上移动，直到到达根节点。<br>因此，基于这样的特性，并查集的主要用途有以下两点：<br>1、维护无向图的连通性（判断两个点是否在同一连通块内，或增加一条边后是否会产生环）；<br>2、用在求解最小生成树的<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/the_ZED/article/details/105938353" >Kruskal算法<i class="fas fa-external-link-alt"></i></a>里。</p>
+<p>一般来说，一个并查集对应三个操作：<br>1、初始化（ Init()函数 ）<br>2、查找函数（ Find()函数 ）<br>3、合并集合函数（ Join()函数 ）</p>
+<p>下面给出上述所有内容的代码汇总：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">const int  N=1005//指定并查集所能包含元素的个数（由题意决定）</span><br><span class="line">int pre[N];     //存储每个结点的前驱结点 </span><br><span class="line">int rank[N];    //树的高度 </span><br><span class="line">void init(int n)     //初始化函数，对录入的 n个结点进行初始化 </span><br><span class="line">&#123;</span><br><span class="line">    for(int i = 0; i &lt; n; i++)&#123;</span><br><span class="line">        pre[i] = i;     //每个结点的上级都是自己 </span><br><span class="line">        rank[i] = 1;    //每个结点构成的树的高度为 1 </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">int find(int x)          //查找结点 x的根结点 </span><br><span class="line">&#123;</span><br><span class="line">    if(pre[x] == x) return x;  //递归出口：x的上级为 x本身，则 x为根结点 </span><br><span class="line">    return find(pre[x]); //递归查找 </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line">int find(int x)     //改进查找算法：完成路径压缩，将 x的上级直接变为根结点，那么树的高度就会大大降低 </span><br><span class="line">&#123;</span><br><span class="line">    if(pre[x] == x) return x;//递归出口：x的上级为 x本身，即 x为根结点 </span><br><span class="line">    return pre[x] = find(pre[x]);   //此代码相当于先找到根结点 rootx，然后 pre[x]=rootx </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">bool isSame(int x, int y)      //判断两个结点是否连通 </span><br><span class="line">&#123;</span><br><span class="line">    return find(x) == find(y);  //判断两个结点的根结点（即代表元）是否相同 </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool join(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    x = find(x);//寻找 x的代表元</span><br><span class="line">    y = find(y);//寻找 y的代表元</span><br><span class="line">    if(x == y) return false;//如果 x和 y的代表元一致，说明他们共属同一集合，则不需要合并，返回 false，表示合并失败；否则，执行下面的逻辑</span><br><span class="line">    if(rank[x] &gt; rank[y]) pre[y]=x;//如果 x的高度大于 y，则令 y的上级为 x</span><br><span class="line">    else//否则</span><br><span class="line">    &#123;</span><br><span class="line">        if(rank[x]==rank[y]) rank[y]++;//如果 x的高度和 y的高度相同，则令 y的高度加1</span><br><span class="line">        pre[x]=y;//让 x的上级为 y</span><br><span class="line">&#125;</span><br><span class="line">return true;//返回 true，表示合并成功</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="原文链接：https-blog-csdn-net-the-ZED-article-details-105126583"><a href="#原文链接：https-blog-csdn-net-the-ZED-article-details-105126583" class="headerlink" title="原文链接：https://blog.csdn.net/the_ZED/article/details/105126583"></a>原文链接：<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/the_ZED/article/details/105126583" >https://blog.csdn.net/the_ZED/article/details/105126583<i class="fas fa-external-link-alt"></i></a></h3>
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/09/10/Leetcode/684/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">684.冗余连接树可以看成是一个连通且无环的无向图。</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">王秋鹏</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A6%82%E8%AE%BA"><span class="nav-text">1. 概论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%B9%B6%E6%9F%A5%E9%9B%86%E7%9A%84%E7%8E%B0%E5%AE%9E%E6%84%8F%E4%B9%89"><span class="nav-text">2. 并查集的现实意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-find-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-text">3. find( )函数的定义与实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-join-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-text">4. join( )函数的定义与实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E4%B9%8B%E4%B8%80%EF%BC%88%E4%BC%98%E5%8C%96find-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="nav-text">5. 路径压缩算法之一（优化find( )函数）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%EF%BC%88%E5%8A%A0%E6%9D%83%E6%A0%87%E8%AE%B0%E6%B3%95%EF%BC%89"><span class="nav-text">6. 路径压缩算法之二（加权标记法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E6%80%BB%E7%BB%93"><span class="nav-text">7. 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E6%96%87%E9%93%BE%E6%8E%A5%EF%BC%9Ahttps-blog-csdn-net-the-ZED-article-details-105126583"><span class="nav-text">原文链接：https:&#x2F;&#x2F;blog.csdn.net&#x2F;the_ZED&#x2F;article&#x2F;details&#x2F;105126583</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
