@@ -9,6 +9,8 @@
     
     <title>
         
+            C++ Primer 第3章 字符串、向量和数组 |
+        
         wangqp
     </title>
     
@@ -21,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.jpg","favicon":"/images/avatar.jpg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.jpg","favicon":"/images/avatar.jpg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
@@ -31,6 +33,11 @@
 <div class="progress-bar-container">
     
 
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
     
 </div>
 
@@ -82,7 +89,7 @@
                     
                         <li class="menu-item">
                             <a class=""
-                               href="/archives"
+                               href="/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E4%B8%8E%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"
                             >
                                 系统编程与网络编程
                             </a>
@@ -90,7 +97,7 @@
                     
                         <li class="menu-item">
                             <a class=""
-                               href="/categories"
+                               href="/%E6%95%B0%E6%8D%AE%E5%BA%93/"
                             >
                                 数据库
                             </a>
@@ -98,7 +105,7 @@
                     
                         <li class="menu-item">
                             <a class=""
-                               href="/tags"
+                               href="/%E9%A1%B9%E7%9B%AE"
                             >
                                 项目
                             </a>
@@ -144,17 +151,17 @@
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">系统编程与网络编程</a>
+                       href="/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E4%B8%8E%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">系统编程与网络编程</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">数据库</a>
+                       href="/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">项目</a>
+                       href="/%E9%A1%B9%E7%9B%AE">项目</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
@@ -181,7 +188,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation"></span>
+            <span class="title-hover-animation">C++ Primer 第3章 字符串、向量和数组</span>
         </div>
 
         
@@ -200,8 +207,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-09-11 15:07:35</span>
-        <span class="mobile">2022-09-11 15:07</span>
+        <span class="pc">2021-09-10 00:00:00</span>
+        <span class="mobile">2021-09-10 00:00</span>
     </span>
     
     
@@ -218,7 +225,151 @@
         
 
         <div class="article-content markdown-body">
-            
+            <p>string、vector是两种最重要的标准库类型，迭代器是一种与 string 和 vector 配套的标准库类型。</p>
+<p>内置数组和其他内置类型一样，数组的实现和硬件密切相关，因此与string和vector相比，数组在灵活性上稍显不足。</p>
+<h5 id="3-1-命名空间的using声明"><a href="#3-1-命名空间的using声明" class="headerlink" title="3.1 命名空间的using声明"></a><strong>3.1 命名空间的using声明</strong></h5><p>可以对单个名字进行独立的using声明</p>
+<p><code>using std::cin;</code></p>
+<p><strong>头文件里不应包含 using 声明</strong></p>
+<h5 id="3-2-标准库类型string"><a href="#3-2-标准库类型string" class="headerlink" title="3.2 标准库类型string"></a><strong>3.2 标准库类型string</strong></h5><p>string 表示可变长的字符序列。</p>
+<p>string 定义在命名空间 using 中。  </p>
+<h6 id="3-2-1-定义和初始化string对象"><a href="#3-2-1-定义和初始化string对象" class="headerlink" title="3.2.1 定义和初始化string对象"></a><strong>3.2.1 定义和初始化string对象</strong></h6><p>string 默认初始化为一个空的 string。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string s1;       <span class="comment">//将 s1 默认初始化为一个空的 string</span></span><br><span class="line"><span class="function">string <span class="title">s1</span><span class="params">(s2)</span></span>;   <span class="comment">//使用拷贝构造函数进行的拷贝初始化。s1 是 s2 的拷贝。</span></span><br><span class="line">string s1 = s2;  <span class="comment">//使用拷贝赋值运算符进行的拷贝初始化。s1 是 s2 的拷贝。</span></span><br><span class="line"><span class="function">string <span class="title">s1</span><span class="params">(<span class="string">&quot;value&quot;</span>)</span></span>;  <span class="comment">//s1 是字面值 &quot;value&quot; 去除最后一个空字符后的拷贝。</span></span><br><span class="line">string s1 = <span class="string">&quot;value&quot;</span>; <span class="comment">//同上。</span></span><br><span class="line"><span class="function">string <span class="title">s1</span><span class="params">(n,<span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">//s1 初始化为 n 个 &#x27;c&#x27;。</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：使用字符串字面值或字符数组初始化 string 对象时，string 对象中是不包含末尾的空字符的，它会将字符数组中末尾的空字符去掉。</p>
+<p><strong>初始化方式</strong></p>
+<ul>
+<li><p>拷贝初始化：使用等号</p>
+</li>
+<li><p>直接初始化：不使用等号</p>
+</li>
+<li><p>列表初始化：使用花括号{}</p>
+</li>
+</ul>
+<h6 id="3-2-2-string对象上的操作"><a href="#3-2-2-string对象上的操作" class="headerlink" title="3.2.2 string对象上的操作"></a><strong>3.2.2 string对象上的操作</strong></h6><pre><code>          <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getline</span>(is, s2);<span class="comment">//从输入流 is 中读取一行赋给 s2，is 是输入流。</span></span><br><span class="line">s.<span class="built_in">empty</span>();<span class="comment">//s为空则返回 ture</span></span><br><span class="line">s.<span class="built_in">size</span>(); <span class="comment">//返回字符数，类型为 size_type，无符号整数</span></span><br><span class="line">s[n];     <span class="comment">//对 s 中元素的索引</span></span><br><span class="line">s3 = s1 + s2;<span class="comment">//连接 s1 与 s2，加号两边必须至少有一个是 string，不能都是字面值，比如 &quot;world&quot;+&quot;hello&quot; 是错误的</span></span><br><span class="line">&lt;.&lt;=,&gt;,&gt;=;   <span class="comment">//比较时从前往后比较单个字母的大小           </span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>因为 cin 会<strong>自动忽略开头的空白并遇到空白就停止读取</strong>，因此不能使用 cin 读取句子；</p>
+<p>字符串字面值与 string 是两种不同的类型</p>
+<p><strong>读写string对象</strong></p>
+<p>可以使用 cin, cout 来读写 string 对象，也可以使用 stringstream 来读写 string 对象。</p>
+<p><strong>getline 函数</strong></p>
+<p>getline() 定义在<strong>头文件 string</strong> 中，以一个 istream 对象和一个 string 对象为输入参数。getline() 读取输入流的内容直到遇到换行符停止，然后将读入的数据存入 string 对象。</p>
+<p>注意 getline 会将换行符也读入，但是不将换行符存入 string 对象。<strong>即触发 getline() 函数返回的那个换行符实际上被丢弃掉了。</strong></p>
+<p>getline() 只要一遇到换行符就结束读取操作并返回结果，即使一开始就是换行符也一样，这种情况下会得到一个空 string。</p>
+<p><strong>getline() 与 &lt;&lt; 一样，会返回它的流参数。</strong>所以可以用 getline 的结果作为条件。</p>
+<p><strong>string::size_type 类型</strong></p>
+<p>string 的 size() 成员函数返回一个 string::size_type 类型的值。</p>
+<p>大多数标准库类型都定义了几种配套的类型，这些<strong>配套类型体现了标准库与机器无关的特性</strong>。</p>
+<p>在具体使用时，通过作用域操作符来表明 size_type 是在类 string 中定义的。</p>
+<p>string::size_type 是<strong>无符号值</strong>，可以确定的是它足够存放任何 string 对象的大小。</p>
+<p>C++11 允许通过 auto 和 decltype 来获得此类型。</p>
+<pre><code>        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> len = s.<span class="built_in">size</span>();<span class="comment">// len 的类型是 string::size_type</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>不要在同一个表达式中混用 size_type 和 int 类型。</p>
+<h6 id="3-2-3-处理string对象中的字符"><a href="#3-2-3-处理string对象中的字符" class="headerlink" title="3.2.3 处理string对象中的字符"></a><strong>3.2.3 处理string对象中的字符</strong></h6><p><strong>cctype 头文件</strong>中有下列标准库函数来处理 string 中的字符。</p>
+<p>下面这些函数的输入和返回值实际都是 int 类型的，且<strong>输入的值 c 必须满足 -1&lt;=c&lt;=255</strong>，<strong>即输入必须是 ASCII 字符。</strong></p>
+<pre><code>       <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">isalnum</span><span class="params">(<span class="type">int</span> c)</span></span>;  <span class="comment">// 当c是字母或数字时为真</span></span><br><span class="line"><span class="built_in">isalpha</span>(c);  <span class="comment">// 当c是字母时为真</span></span><br><span class="line"><span class="built_in">isdigit</span>(c);  <span class="comment">// 当c是数字时为真</span></span><br><span class="line"><span class="built_in">islower</span>(c);  <span class="comment">// 当c是小写字母时为真</span></span><br><span class="line"><span class="built_in">isupper</span>(c);  <span class="comment">// 当c是大写字母时为真</span></span><br><span class="line"><span class="built_in">ispunct</span>(c);  <span class="comment">// 标点符号</span></span><br><span class="line"><span class="built_in">isspace</span>(c);  <span class="comment">// 空白（包括空格、制表符、回车符、换行符等）</span></span><br><span class="line"><span class="built_in">tolower</span>(c);  <span class="comment">// 字符转换为小写，返回转换结果</span></span><br><span class="line"><span class="built_in">toupper</span>(c);  <span class="comment">// 字符转换为大写，返回转换结果</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>建议：使用 c++ 版本的标准库头文件，即 cname 而非 name.h 类型的头文件。cname 头文件中的名字都从属于命名空间 std；</p>
+<p><strong>范围for语句</strong></p>
+<pre><code>     <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string str;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> c:str)         <span class="comment">// 对于str中的每个字符</span></span><br><span class="line">    cout &lt;&lt; c &lt;&lt; endl;  <span class="comment">// 输出当前字符，后面紧跟一个换行符</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当要改变 string 对象中的值时，需要把循环变量定义成<strong>引用类型</strong>。必须通过显示添加 &amp; 符号来声明引用类型。</p>
+<p>不能在范围 for 语句中改变所遍历序列的大小。</p>
+<pre><code>   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;c:str)    c = <span class="built_in">toupper</span>(c);     <span class="comment">// 转换为大写              </span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>对 string 的最后一个字符进行索引：<code>s[s.size()-1]</code>;</p>
+<p>索引必须大于等于 0 小于 size，使用索引前最好用 if(!s.empty()) 判断一下字符串是否为空。</p>
+<p>任何表达式只要是整型值就可以作为索引。索引是无符号类型 size_type；</p>
+<h5 id="3-3-标准库类型vector"><a href="#3-3-标准库类型vector" class="headerlink" title="3.3 标准库类型vector"></a><strong>3.3 标准库类型vector</strong></h5><p>vector 是一个类模板</p>
+<p>vector 是模板，vector 是类型</p>
+<h6 id="3-3-1-定义和初始化vector对象"><a href="#3-3-1-定义和初始化vector对象" class="headerlink" title="3.3.1 定义和初始化vector对象"></a><strong>3.3.1 定义和初始化vector对象</strong></h6><p>vector 默认初始化为一个空 vector。</p>
+<pre><code>         <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;string&gt; <span class="title">v2</span><span class="params">(v1)</span></span>;       <span class="comment">// v2=v1</span></span><br><span class="line"><span class="function">vector&lt;string&gt; <span class="title">v3</span><span class="params">(<span class="number">10</span>,<span class="string">&quot;hi&quot;</span>)</span></span>;  <span class="comment">// 10个string</span></span><br><span class="line"><span class="function">vector&lt;string&gt; <span class="title">v4</span><span class="params">(<span class="number">10</span>)</span></span>;       <span class="comment">// 10个空string</span></span><br><span class="line"></span><br><span class="line">vector&lt;string&gt; v5&#123;<span class="string">&quot;an&quot;</span>,<span class="string">&quot;the&quot;</span>&#125;;  <span class="comment">// 列表初始化</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p><strong>值初始化</strong></p>
+<p><strong>值初始化的方式：</strong>如果对象是内置类型，则初始值为 0，如果是类类型，则由类默认初始化。</p>
+<p><strong>列表初始化</strong></p>
+<p>使用花括号一般表示列表初始化：初始化过程会尽量把花括号内的值当作一个初始值列表来处理。</p>
+<p>如果花括号内的值不能用来列表初始化，比如对一个 string 的 vector 初始化，但是花括号内的值为整型，如下：</p>
+<pre><code>        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;string&gt; v &#123;<span class="number">10</span>&#125;;        <span class="comment">// v 有 10 个默认初始化的元素</span></span><br><span class="line">vector&lt;string&gt; v &#123;<span class="number">10</span>, <span class="string">&quot;hi&quot;</span>&#125;;  <span class="comment">// v 有 10 个值为 &quot;hi&quot; 的元素</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<h6 id="3-3-2-向vector对象中添加元素"><a href="#3-3-2-向vector对象中添加元素" class="headerlink" title="3.3.2 向vector对象中添加元素"></a><strong>3.3.2 向vector对象中添加元素</strong></h6><p>vector可以高效增长，通常先定义一个空 vector，然后在添加元素会更快速。</p>
+<p>定义 vector 时，已知 vector 的大小，如果初始值都一样，初始化时确定大小与值会更快。如果初始值不全一样，即使已知大小，最好也先定义一个空的 vector，再添加元素。</p>
+<h6 id="3-3-3-其他vector操作"><a href="#3-3-3-其他vector操作" class="headerlink" title="3.3.3 其他vector操作"></a><strong>3.3.3 其他vector操作</strong></h6><pre><code>     <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v.<span class="built_in">size</span>(); </span><br><span class="line">v.<span class="built_in">empty</span>(); </span><br><span class="line">v.<span class="built_in">push_back</span>(t);              </span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>可以用范围 for 语句处理 vector 序列的元素</p>
+<h5 id="3-4-迭代器介绍"><a href="#3-4-迭代器介绍" class="headerlink" title="3.4 迭代器介绍"></a><strong>3.4 迭代器介绍</strong></h5><p>所有标准库容器都可以使用迭代器</p>
+<h6 id="3-4-1-使用迭代器"><a href="#3-4-1-使用迭代器" class="headerlink" title="3.4.1 使用迭代器"></a><strong>3.4.1 使用迭代器</strong></h6><pre><code>   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> b = v.<span class="built_in">begin</span>(), e = v.<span class="built_in">end</span>();</span><br><span class="line"><span class="keyword">auto</span> d = v.<span class="built_in">cbegin</span>(); f = v.<span class="built_in">cend</span>();  <span class="comment">// 返回的是const_iterator     </span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>end 成员指向容器的”尾后元素“</p>
+<p>如果容器为空，则 begin 和 end 返回的都是尾后迭代器</p>
+<pre><code>         <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*iter     <span class="comment">// 返回iter所指元素的引用</span></span><br><span class="line">iter-&gt;mem <span class="comment">// 等价于 (*iter).mem</span></span><br><span class="line">++iter    <span class="comment">// 指向下一个元素</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>迭代器的类型是 iterator 或 const_iterator 来表示</p>
+<pre><code>    <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt;::iterator it = v.<span class="built_in">begin</span>();</span><br><span class="line">string::iterator it;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h6 id="3-4-2-迭代器运算"><a href="#3-4-2-迭代器运算" class="headerlink" title="3.4.2 迭代器运算"></a><strong>3.4.2 迭代器运算</strong></h6><p>string 和 vector 支持的迭代器运算。注意不能将两个迭代器相加。</p>
+<pre><code>        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iter + n;</span><br><span class="line">iter += n;</span><br><span class="line">iter1 - iter2; <span class="comment">// 返回两个迭代器之间的距离，difference_type类型的带符号整数</span></span><br><span class="line">&gt;, &gt;=, &lt;, &lt;=;  <span class="comment">// 比较运算符</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<h5 id="3-5-数组"><a href="#3-5-数组" class="headerlink" title="3.5 数组"></a><strong>3.5 数组</strong></h5><p>数组的大小确定不变</p>
+<h6 id="3-5-1-定义和初始化内置数组"><a href="#3-5-1-定义和初始化内置数组" class="headerlink" title="3.5.1 定义和初始化内置数组"></a><strong>3.5.1 定义和初始化内置数组</strong></h6><pre><code>        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[<span class="number">10</span>];  <span class="comment">// 数组的维度必须是个常量表达式</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>数组和 vector 的元素都必须是对象，不能是引用</p>
+<p>数组不能用 auto 来定义。</p>
+<p><strong>字符数组的特殊性</strong></p>
+<pre><code>        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> a1[] = &#123;<span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;+&#x27;</span>, <span class="string">&#x27;+&#x27;</span>&#125;;  <span class="comment">// 列表初始化，没有空字符，维度是3</span></span><br><span class="line"><span class="type">char</span> a2[] = <span class="string">&quot;c++&quot;</span>;            <span class="comment">// 有空字符，维度是4</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> a4[<span class="number">3</span>] = <span class="string">&quot;c++&quot;</span>;     <span class="comment">// 错误，没有空间存放空字符</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>不能用数组为另一个数组赋值或拷贝。可以按元素一个一个拷贝，但<strong>不能直接拷贝整个数组</strong>。</p>
+<p>按照由内向外的顺序理解数组的类型     </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *ptrs[<span class="number">10</span>];           <span class="comment">// ptrs是一个含有10个整型指针的数组</span></span><br><span class="line"><span class="built_in">int</span> (*ptrs)[<span class="number">10</span>] = &amp;arr;  <span class="comment">// ptrs是一个指针，指向一个含有10个整数的数组</span></span><br><span class="line"><span class="built_in">int</span> (&amp;ptrs)[<span class="number">10</span>] = &amp;arr;  <span class="comment">// ptrs是一个引用，引用一个含有10个整数的数组</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="3-5-2-访问数组元素"><a href="#3-5-2-访问数组元素" class="headerlink" title="3.5.2 访问数组元素"></a><strong>3.5.2 访问数组元素</strong></h6><p>数组下标通常用 size_t 类型</p>
+<p>使用范围 for 语句遍历数组元素</p>
+<h6 id="3-5-3-指针和数组"><a href="#3-5-3-指针和数组" class="headerlink" title="3.5.3 指针和数组"></a><strong>3.5.3 指针和数组</strong></h6><p>在大多数情况，使用数组类型的对象其实是使用一个指向该数组首元素的指针</p>
+<p>标准库类型（如 string、vector 等）的下标都是无符号类型，而数组内置的下标没有这个要求。</p>
+<p>指向数组元素的指针等价于 vector 中的迭代器</p>
+<h6 id="3-5-4-C风格字符串"><a href="#3-5-4-C风格字符串" class="headerlink" title="3.5.4 C风格字符串"></a><strong>3.5.4 C风格字符串</strong></h6><p>c++ 支持 c 风格字符串，但是最好不要使用，c 风格字符串使用不便，并且极易引发程序漏洞</p>
+<p>c 风格字符串不是一种类型，而是一种<strong>写法</strong>，是为了表达和使用字符串而形成的一种约定俗成的写法。</p>
+<p>用这种写法书写的字符串存放在字符数组中并以<strong>空字符（’\0’）</strong>结束。</p>
+<p><strong>c 风格字符串函数</strong></p>
+<pre><code>           <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">strlen</span>(p);       <span class="comment">// 返回 p 的长度，不包括空字符</span></span><br><span class="line"><span class="built_in">strcmp</span>(p1, p2);  <span class="comment">// 比较 p1 与 p2，如果 p1 大于 p2，返回一个正值，如果相等返回 0，否则返回负值。</span></span><br><span class="line"><span class="built_in">strcat</span>(p1, p2);  <span class="comment">// 把 p2 附到 p1 之后，并返回 p1</span></span><br><span class="line"><span class="built_in">strcpy</span>(p1, p2);  <span class="comment">// 把 p2 拷贝给 p1，返回 p1</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>这些函数都不验证参数。传入参数的指针必须指向以空字符结束的数组。必须确保数组足够大。</p>
+<pre><code>            <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> ca[] = &#123;<span class="string">&#x27;q&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;d&#x27;</span>&#125;;  <span class="comment">// 使用列表定义的都没有空字符</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>对于 string，可以使用 s = s1 + s2，s1 &gt; s2 等加和与比较，而 c 风格字符串不行，因为他们实际上是指针。</p>
+<h6 id="3-5-5-与旧代码的接口"><a href="#3-5-5-与旧代码的接口" class="headerlink" title="3.5.5 与旧代码的接口"></a><strong>3.5.5 与旧代码的接口</strong></h6><p><strong>string对象和C风格字符串的混用</strong></p>
+<p>可以使用字符串字面值来初始化 string 对象或与 string 对象加和，所有可以用字符串字面值的地方都可以使用以空字符结束的字符数组来代替。</p>
+<p>反过来不能使用 string 对象初始化字符数组，必须要用 <strong>c_str()</strong> 函数将 string 对象转化为 c 风格字符串</p>
+<pre><code>     <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span>* cp = s.<span class="built_in">c_str</span>();  <span class="comment">// s.c_str() 返回一个指向以空字符结束的字符数组的指针。</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p><strong>使用数组初始化 vector 对象</strong></p>
+<p>可以使用数组来初始化 vector 对象，用两个指针来表明范围（左闭合区间）</p>
+<pre><code>       <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">ivec</span><span class="params">(begin(arr), end(arr))</span></span>;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p><strong>建议不要使用 c 风格字符串和内置数值，都使用标准库容器</strong></p>
+<p><strong>3.6 多维数组</strong></p>
+<p>严格来说 C++ 中没有多维数组，那实际是数组的数组。</p>
+<pre><code>     <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">10</span>][<span class="number">20</span>][<span class="number">30</span>] = &#123;<span class="number">0</span>&#125;;  <span class="comment">// 将所有元素初始化为 0</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p><strong>多维数组的初始化</strong></p>
+<pre><code>  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;显式初始化所有元素&#x27;</span></span><br><span class="line"><span class="type">int</span> arr[<span class="number">2</span>][<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line"><span class="type">int</span> arr[<span class="number">2</span>][<span class="number">3</span>] = &#123; &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125; &#125;;<span class="comment">//上面这两种方式效果是一样的</span></span><br><span class="line"><span class="string">&#x27;显式初始化部分元素&#x27;</span></span><br><span class="line"><span class="type">int</span> arr[<span class="number">2</span>][<span class="number">3</span>] = &#123; &#123;<span class="number">1</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>&#125; &#125;;<span class="comment">//将第一行第一个元素和第二行第一、二个元素初始化为1,4,5，其他元素执行值初始化。</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>​    </p>
+<p><strong>多维数组的下标引用</strong></p>
+<pre><code>      <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">2</span>][<span class="number">3</span>];</span><br><span class="line">arr[<span class="number">0</span>];<span class="comment">//这是一个有三个元素的一维数组</span></span><br><span class="line">arr[<span class="number">0</span>][<span class="number">0</span>];<span class="comment">//第一行第一列的元素</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>​       </p>
+<p><strong>使用范围 for 语句处理多维数组</strong></p>
+<p>新标准中可以使用范围 for 语句处理多维数组。</p>
+<p>注意范围 for 语句中改变元素值要显示使用 &amp; 符号声明为引用类型。</p>
+<p>注意：使用范围 for 循环处理多维数组时，<strong>除了最内层的循环外，其他所有循环的控制变量都应该是引用类型</strong>。</p>
+<p>因为如果不声明为引用类型，编译器会自动将控制变量转换为指向数组首元素的指针，就不能在内层继续使用范围 for 循环处理该控制变量了。</p>
+<pre><code>  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span>&amp; row : arr)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> col : row)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p><strong>使用 3 种方式来输出 arr 的元素</strong></p>
+<pre><code>        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 范围 for 语句-不使用类型别名</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">const</span> <span class="built_in">int</span> (&amp;row)[<span class="number">4</span>] : arr)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> col : row)</span><br><span class="line">        cout &lt;&lt; col &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">cout &lt;&lt; endl;</span><br><span class="line"><span class="comment">// 范围 for 语句-使用类型别名</span></span><br><span class="line"><span class="keyword">using</span> int_array = <span class="type">int</span>[<span class="number">4</span>];</span><br><span class="line"><span class="keyword">for</span> (int_array &amp;p : ia)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> q : p)</span><br><span class="line">        cout &lt;&lt; q &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">cout &lt;&lt; endl;</span><br><span class="line"><span class="comment">// 普通 for 循环</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i != <span class="number">3</span>; ++i)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> j = <span class="number">0</span>; j != <span class="number">4</span>; ++j)</span><br><span class="line">        cout &lt;&lt; arr[i][j] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">cout &lt;&lt; endl;</span><br><span class="line"><span class="comment">// 指针</span></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> (*row)[<span class="number">4</span>] = arr; row != arr + <span class="number">3</span>; ++row)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> *col = *row; col != *row + <span class="number">4</span>; ++col)</span><br><span class="line">        cout &lt;&lt; *col &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">cout &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+</code></pre>
+
         </div>
 
         
@@ -231,13 +382,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/C++/C++Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%AC%AC%E5%9B%9B%E7%AB%A0/"
+                           href="/C++/C++Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%BA%8C%E7%AB%A0/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item"></span>
+                                <span class="post-nav-title-item">C++ Primer 第二章 变量和基本类型</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -247,10 +398,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/C++/C++%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5/"
+                           href="/C++/C++Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%AC%AC%E5%9B%9B%E7%AB%A0/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item"></span>
+                                <span class="post-nav-title-item">C++ Primer 第一章 开始</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -361,7 +512,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        
+        <ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84using%E5%A3%B0%E6%98%8E"><span class="nav-text">3.1 命名空间的using声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-%E6%A0%87%E5%87%86%E5%BA%93%E7%B1%BB%E5%9E%8Bstring"><span class="nav-text">3.2 标准库类型string</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-2-1-%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96string%E5%AF%B9%E8%B1%A1"><span class="nav-text">3.2.1 定义和初始化string对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-2-2-string%E5%AF%B9%E8%B1%A1%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-text">3.2.2 string对象上的操作</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-2-3-%E5%A4%84%E7%90%86string%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="nav-text">3.2.3 处理string对象中的字符</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-%E6%A0%87%E5%87%86%E5%BA%93%E7%B1%BB%E5%9E%8Bvector"><span class="nav-text">3.3 标准库类型vector</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3-1-%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96vector%E5%AF%B9%E8%B1%A1"><span class="nav-text">3.3.1 定义和初始化vector对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3-2-%E5%90%91vector%E5%AF%B9%E8%B1%A1%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-text">3.3.2 向vector对象中添加元素</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3-3-%E5%85%B6%E4%BB%96vector%E6%93%8D%E4%BD%9C"><span class="nav-text">3.3.3 其他vector操作</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%BB%8B%E7%BB%8D"><span class="nav-text">3.4 迭代器介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-4-1-%E4%BD%BF%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-text">3.4.1 使用迭代器</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-4-2-%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%BF%90%E7%AE%97"><span class="nav-text">3.4.2 迭代器运算</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-%E6%95%B0%E7%BB%84"><span class="nav-text">3.5 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-5-1-%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E5%86%85%E7%BD%AE%E6%95%B0%E7%BB%84"><span class="nav-text">3.5.1 定义和初始化内置数组</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-5-2-%E8%AE%BF%E9%97%AE%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0"><span class="nav-text">3.5.2 访问数组元素</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-5-3-%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84"><span class="nav-text">3.5.3 指针和数组</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-5-4-C%E9%A3%8E%E6%A0%BC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">3.5.4 C风格字符串</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-5-5-%E4%B8%8E%E6%97%A7%E4%BB%A3%E7%A0%81%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="nav-text">3.5.5 与旧代码的接口</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
@@ -396,7 +547,7 @@
 
 
 
-<div class="post-scripts">
+<div class="post-scripts pjax">
     
         
 <script src="/js/left-side-toggle.js"></script>
@@ -407,6 +558,40 @@
 
     
 </div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
 
 
 
