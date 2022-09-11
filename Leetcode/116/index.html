@@ -9,7 +9,7 @@
     
     <title>
         
-            684.冗余连接树可以看成是一个连通且无环的无向图。 |
+            116. 填充每个节点的下一个右侧节点指针 |
         
         wangqp
     </title>
@@ -183,7 +183,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">684.冗余连接树可以看成是一个连通且无环的无向图。</span>
+            <span class="title-hover-animation">116. 填充每个节点的下一个右侧节点指针</span>
         </div>
 
         
@@ -220,29 +220,29 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定往一棵 <code>n</code> 个节点 (节点值 <code>1～n</code>) 的树中添加一条边后的图。添加的边的两个顶点包含在 <code>1</code> 到 <code>n</code> 中间，且这条附加的边不属于树中已存在的边。图的信息记录于长度为 <code>n</code> 的二维数组 <code>edges</code> ，<code>edges[i] = [ai, bi]</code> 表示图中在 <code>ai</code> 和 <code>bi</code> 之间存在一条边。</p>
-<p>请找出一条可以删去的边，删除后可使得剩余部分是一个有着 <code>n</code> 个节点的树。如果有多个答案，则返回数组 <code>edges</code> 中最后出现的边。</p>
+            <p>给定一个 <strong>完美二叉树</strong> ，其所有叶子节点都在同一层，每个父节点都有两个子节点。二叉树定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct Node &#123;</span><br><span class="line">  int val;</span><br><span class="line">  Node *left;</span><br><span class="line">  Node *right;</span><br><span class="line">  Node *next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 <code>NULL</code>。</p>
+<p>初始状态下，所有 next 指针都被设置为 <code>NULL</code>。</p>
 <p><strong>示例 1：</strong></p>
-<p><img src="https://pic.leetcode-cn.com/1626676174-hOEVUL-image.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: edges = [[1,2], [1,3], [2,3]]</span><br><span class="line">输出: [2,3]</span><br></pre></td></tr></table></figure>
+<p><img src="https://assets.leetcode.com/uploads/2019/02/14/116_sample.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,2,3,4,5,6,7]</span><br><span class="line">输出：[1,#,2,3,#,4,5,6,7,#]</span><br><span class="line">解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，如图 B 所示。序列化的输出按层序遍历排列，同一层节点由 next 指针连接，&#x27;#&#x27; 标志着每一层的结束。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><strong>示例 2：</strong></p>
-<p><img src="https://pic.leetcode-cn.com/1626676179-kGxcmu-image.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: edges = [[1,2], [2,3], [3,4], [1,4], [1,5]]</span><br><span class="line">输出: [1,4]</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：root = []</span><br><span class="line">输出：[]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><strong>提示:</strong></p>
+<p><strong>提示：</strong></p>
 <ul>
-<li>  <code>n == edges.length</code></li>
-<li>  <code>3 &lt;= n &lt;= 1000</code></li>
-<li>  <code>edges[i].length == 2</code></li>
-<li>  <code>1 &lt;= ai &lt; bi &lt;= edges.length</code></li>
-<li>  <code>ai != bi</code></li>
-<li>  <code>edges</code> 中无重复元素</li>
-<li>  给定的图是连通的</li>
+<li>  树中节点的数量在 <code>[0, 212 - 1]</code> 范围内</li>
+<li>  <code>-1000 &lt;= node.val &lt;= 1000</code></li>
 </ul>
-<h2 id="解法1-并查集"><a href="#解法1-并查集" class="headerlink" title="解法1: 并查集"></a>解法1: 并查集</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">findRedundantConnection</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; edges)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = edges.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">pre</span><span class="params">(n+<span class="number">1</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;n+<span class="number">1</span>;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            pre[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n+<span class="number">1</span>;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> p_x = <span class="built_in">find</span>(pre,edges[i][<span class="number">0</span>]);</span><br><span class="line">            <span class="type">int</span> p_y = <span class="built_in">find</span>(pre,edges[i][<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(p_x == p_y)</span><br><span class="line">            &#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(edges[i][<span class="number">0</span>]);</span><br><span class="line">                ans.<span class="built_in">push_back</span>(edges[i][<span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                pre[p_x] = p_y;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; pre,<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pre[x] == x)</span><br><span class="line">            <span class="keyword">return</span> x;</span><br><span class="line">        <span class="keyword">return</span> pre[x] = <span class="built_in">find</span>(pre,pre[x]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
+<p><strong>进阶：</strong></p>
+<ul>
+<li>  你只能使用常量级额外空间。</li>
+<li>  使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。</li>
+</ul>
+<h2 id="解法：层序遍历"><a href="#解法：层序遍历" class="headerlink" title="解法：层序遍历"></a>解法：层序遍历</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">// Definition for a Node.</span></span><br><span class="line"><span class="comment">class Node &#123;</span></span><br><span class="line"><span class="comment">public:</span></span><br><span class="line"><span class="comment">    int val;</span></span><br><span class="line"><span class="comment">    Node* left;</span></span><br><span class="line"><span class="comment">    Node* right;</span></span><br><span class="line"><span class="comment">    Node* next;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Node() : val(0), left(NULL), right(NULL), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Node(int _val, Node* _left, Node* _right, Node* _next)</span></span><br><span class="line"><span class="comment">        : val(_val), left(_left), right(_right), next(_next) &#123;&#125;</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">connect</span><span class="params">(Node* root)</span> </span>&#123;      </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        Node* head = root;</span><br><span class="line"></span><br><span class="line">        queue&lt;Node*&gt; que_root;</span><br><span class="line">        que_root.<span class="built_in">push</span>(root);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(!que_root.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> que_root_size = que_root.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;que_root_size;++i)</span><br><span class="line">            &#123;</span><br><span class="line">                Node* node = que_root.<span class="built_in">front</span>();</span><br><span class="line">                que_root.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span>(i != que_root_size <span class="number">-1</span>)</span><br><span class="line">                    node-&gt;next = que_root.<span class="built_in">front</span>();</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left != <span class="literal">nullptr</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    que_root.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;right != <span class="literal">nullptr</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    que_root.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
         </div>
 
         
@@ -255,33 +255,18 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86/"
+                           href="/C++/C++Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%BA%8C%E7%AB%A0/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">并查集</span>
+                                <span class="post-nav-title-item">C++ Primer 第二章 变量和基本类型</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
                     </div>
                 
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E9%BB%91%E9%A9%AC%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AF%95/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">黑马系统编程课程笔记</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
                 
             </div>
         
@@ -385,7 +370,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%951-%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="nav-text">解法1: 并查集</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95%EF%BC%9A%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-text">解法：层序遍历</span></a></li></ol>
     </div>
 </div>
         </aside>
