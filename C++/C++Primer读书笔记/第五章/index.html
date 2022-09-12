@@ -9,7 +9,7 @@
     
     <title>
         
-            C++ Primer 第一章 开始 |
+            C++ Primer 第五章 语句 |
         
         wangqp
     </title>
@@ -188,7 +188,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">C++ Primer 第一章 开始</span>
+            <span class="title-hover-animation">C++ Primer 第五章 语句</span>
         </div>
 
         
@@ -225,7 +225,111 @@
         
 
         <div class="article-content markdown-body">
-            
+            <h5 id="5-1-简单语句"><a href="#5-1-简单语句" class="headerlink" title="5.1 简单语句"></a><strong>5.1 简单语句</strong></h5><p><strong>表达式语句</strong></p>
+<p>一个表达式加上分号就是<strong>表达式语句</strong>。表达式的语句执行表达式并丢弃掉求值结果</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ival + <span class="number">3</span>;<span class="comment">//一条没有实际用处的表达式语句</span></span><br><span class="line">cout &lt;&lt; ival;<span class="comment">//一条有用的表达式语句</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>空语句</strong></p>
+<p>空语句是最简单的语句，只有一个分号</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;<span class="comment">//空语句     </span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>用处：用在语法上需要一条语句但逻辑上不需要的地方。比如当循环的全部工作在条件部分就可以完成时。</p>
+<p>使用空语句应该加上注释。</p>
+<p><strong>复合语句（块）</strong></p>
+<p>花括号括起来的语句和声明序列都是<strong>复合语句（块）</strong>。一个块就是一个作用域</p>
+<p>空块的作用等价于空语句。</p>
+<h5 id="5-2-语句作用域"><a href="#5-2-语句作用域" class="headerlink" title="5.2 语句作用域"></a><strong>5.2 语句作用域</strong></h5><p>可以在 if、switch、while、for 语句的控制结构内定义变量。</p>
+<p>常见的语句有条件语句、循环语句、跳转语句三种。</p>
+<h5 id="5-3-条件语句"><a href="#5-3-条件语句" class="headerlink" title="5.3 条件语句"></a><strong>5.3 条件语句</strong></h5><p>两种：if 语句和 switch 语句</p>
+<h6 id="5-3-1-if语句"><a href="#5-3-1-if语句" class="headerlink" title="5.3.1 if语句"></a><strong>5.3.1 if语句</strong></h6><p>if 语句有两种形式，一种有 else 分支，另一种没有。</p>
+<p>c++ 规定 else 与离他最近的尚未匹配的 if 匹配。注意不要搞错。</p>
+<p>使用 if 语句最好在所有的 if 和 else 之后都用花括号。</p>
+<h6 id="5-3-2-switch语句"><a href="#5-3-2-switch语句" class="headerlink" title="5.3.2 switch语句"></a><strong>5.3.2 switch语句</strong></h6><p>switch 语句计算一个<strong>整型表达式</strong>的值，然后根据这个值从几条执行路径中选择一条。</p>
+<p>case 关键字和它对应的值一起被称为 case 标签，case 标签必须为<strong>整型常量表达式</strong>。</p>
+<p><strong>default</strong> 也是一种特殊的 case 标签。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(ch)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span>: ++aCnt; <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;b&#x27;</span>: ++bCnt; <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：如果 switch 条件值于某个 case 标签匹配成功后，程序将从该 case 标签一直执行到 switch 末尾或遇到 break。</p>
+<p>一条 case 后可以跟多条语句，不必用花括号括起来。</p>
+<p>一般在每个 case标签后都有一条 break 语句。如果需要两个或多个值共享同一组操作，可以故意省略掉 break 语句。</p>
+<p>c++ 程序的形式比较自由，case 标签之后不一定要换行。</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(ch)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span>: <span class="keyword">case</span> <span class="string">&#x27;b&#x27;</span>:</span><br><span class="line">        ++Cnt;</span><br><span class="line">        <span class="keyword">break</span>;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一般不要省略 case 分支最后的 break 语句。如果没有 break 语句，最好注释一下。</p>
+<p>如果没有任何一个 case 标签匹配 switch 表达式的值，就执行 default 分支。</p>
+<p>即使不准备在 default 下做任何工作，最好也定义一个 default 标签。</p>
+<p>如果要在 case 分支定义并初始化变量，应该定义在块内以约束其作用域。</p>
+<h5 id="5-4-迭代语句"><a href="#5-4-迭代语句" class="headerlink" title="5.4 迭代语句"></a><strong>5.4 迭代语句</strong></h5><p>三种：while 语句、for 语句（包括范围 for 语句）、do while 语句</p>
+<h6 id="5-4-1-while语句"><a href="#5-4-1-while语句" class="headerlink" title="5.4.1 while语句"></a><strong>5.4.1 while语句</strong></h6><p>while 的条件不能为空。条件部分可以是一个表达式或<strong>带初始化的变量声明</strong>。</p>
+<p>定义在 while 条件部分或循环体内的变量每次迭代都会重新创建和销毁。</p>
+<p>while 适合不知道循环多少次的情况。</p>
+<h6 id="5-4-2-传统的for语句"><a href="#5-4-2-传统的for语句" class="headerlink" title="5.4.2 传统的for语句"></a><strong>5.4.2 传统的for语句</strong></h6><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(init-statement; condition; expression)</span><br><span class="line">    statement;</span><br></pre></td></tr></table></figure>
+
+<p>init-statement 可以是声明语句、表达式语句或空语句。init-statement 可以定义多个对象，但是只能有一条声明语句。</p>
+<p>expression 在每次循环之后执行。</p>
+<p>for 语句头能省略掉三者中的任意一个或全部。</p>
+<p>省略 condition 等于条件恒为 true。</p>
+<h6 id="5-4-3-范围for语句"><a href="#5-4-3-范围for语句" class="headerlink" title="5.4.3 范围for语句"></a><strong>5.4.3 范围for语句</strong></h6><p>范围 for 语句用来遍历容器或其他序列的所有元素。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(declaration : expression)</span><br><span class="line">    statement</span><br></pre></td></tr></table></figure>
+
+<p>expression 表示的必须是一个序列，可以是花括号括起来的初始值列表。这些序列的共同的是都可以返回迭代器的 begin 和 end 成员。</p>
+<p>declaration 定义一个能从序列中元素转换过来的<strong>变量（不是迭代器）</strong>。最简单的方法是使用 auto 类型说明符。</p>
+<p>如果需要对容器中的元素执行写操作，必须<strong>将循环变量声明成引用类型</strong>。</p>
+<p><strong>循环变量可以声明为对常量的引用，不需要写时最好都声明为常量引用</strong></p>
+<p>每次迭代都会<strong>重新定义</strong>循环控制变量，并将其初始化为序列的下一个值。</p>
+<p>范围 for 语句不能改变序列的元素数量。因为其预存了 end() 的值，改变元素数量后 end() 的值就可能失效了。</p>
+<h6 id="5-4-4-dowhile语句"><a href="#5-4-4-dowhile语句" class="headerlink" title="5.4.4 dowhile语句"></a><strong>5.4.4 dowhile语句</strong></h6><p>do while 语句与 while 语句的唯一区别就是它先执行循环体后检查条件。即至少执行一次循环。</p>
+<p>注意：do while 后<strong>不要忘了加分号。</strong></p>
+<p>因为 condition 在循环体后面，所以 condition 使用的变量应该定义在循环体外面。</p>
+<h5 id="5-5-跳转语句"><a href="#5-5-跳转语句" class="headerlink" title="5.5 跳转语句"></a><strong>5.5 跳转语句</strong></h5><p>四种：break、continue、goto、return</p>
+<h6 id="5-5-1-break语句"><a href="#5-5-1-break语句" class="headerlink" title="5.5.1 break语句"></a><strong>5.5.1 break语句</strong></h6><p>break 语句终止离它最近的 while、do while、for 或 switch 语句，并从这些语句之后的第一条语句开始执行。</p>
+<p>break 语句只能出现在迭代语句或 switch 内部。</p>
+<h6 id="5-5-2-continue语句"><a href="#5-5-2-continue语句" class="headerlink" title="5.5.2 continue语句"></a><strong>5.5.2 continue语句</strong></h6><p>continue 语句终止最近的循环中的当前迭代并开始下一次迭代。</p>
+<p>continue 适用范围比 break 少了一个 switch</p>
+<h6 id="5-5-3-goto语句"><a href="#5-5-3-goto语句" class="headerlink" title="5.5.3 goto语句"></a><strong>5.5.3 goto语句</strong></h6><p>goto 语句的作用是从 goto 语句无条件跳转到<strong>同一函数内</strong>的另一条语句。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">label: <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">goto</span> label;</span><br></pre></td></tr></table></figure>
+
+<p>label 是用于标识一条语句的标示符</p>
+<p>标签标示符独立于变量或其他标示符的名字，标签标示符可以和程序中其他实体的标示符使用同一个名字而不会相互干扰。</p>
+<p>如果 goto 语句跳回了一条变量的定义之前意味着系统将会销毁该变量，然后重新创建它。</p>
+<p><strong>不要使用 goto</strong>，它会令程序又难理解又难修改。</p>
+<h5 id="5-6-try语句块和异常处理"><a href="#5-6-try语句块和异常处理" class="headerlink" title="5.6 try语句块和异常处理"></a><strong>5.6 try语句块和异常处理</strong></h5><p>异常是指存在于运行时的反常行为，典型的异常有失去数据库连接和遇到意外输入等。处理异常可能是设计系统时最难的一部分。</p>
+<p>当程序检测到一个无法处理的问题时，就需要<strong>异常处理</strong>，此时检测到问题的部分应该发出检测信号。</p>
+<p>如果程序里有可能引发异常的代码，也应该有专门的代码处理问题。</p>
+<p>C++ 的异常处理机制为<strong>异常检测</strong>和<strong>异常处理</strong>提供支持，它包括：</p>
+<ol>
+<li><strong>throw 表达式：</strong>异常检测部分使用 throw 表达式来表示遇到了无法处理的问题。称为 throw 引发了异常。</li>
+<li><strong>try 语句块：</strong>异常处理部分使用 try 语句块处理异常。try 语句块以关键字 try 开始，以一个或多个 catch 子句结束。</li>
+<li><strong>一套异常类：</strong>用于在 throw 表达式和相关的 catch 子句间传递异常的具体信息。</li>
+</ol>
+<h6 id="5-6-1-throw-表达式"><a href="#5-6-1-throw-表达式" class="headerlink" title="5.6.1 throw 表达式"></a><strong>5.6.1 throw 表达式</strong></h6><p>throw 表达式包含关键字 throw 和紧随其后的一个表达式，表达式的类型就是抛出的异常类型。</p>
+<p>即 throw 后面跟一个异常类型的对象（必须同时使用 string 或 C 风格字符串对其初始化）。</p>
+<pre><code>      <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">throw</span> <span class="built_in">runtime_error</span>(<span class="string">&quot;Data must be same as size&quot;</span>);<span class="comment">//使用 throw 表达式抛出一个运行时错误。</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<h6 id="5-6-2-try语句块"><a href="#5-6-2-try语句块" class="headerlink" title="5.6.2 try语句块"></a><strong>5.6.2 try语句块</strong></h6><p>跟在 try 块后面的是一个或多个 catch 子句。catch 子句包括三部分：关键字 catch、括号内一个异常类型的对象的声明（叫做异常声明）、一个块。</p>
+<p>当 try 语句块中抛出了一个异常，如果该异常类型与 catch 子句括号中的异常类型相同，就会执行该 catch 子句。</p>
+<p>catch 一旦完成，程序就跳转到 try 语句块最后一个 catch 子句之后的那条语句继续执行。</p>
+<p>在 catch 后面的括号里使用省略号(…)可以让 catch 捕获所有类型的异常。</p>
+<p>每个标准库异常类都有一个 <strong>what 成员函数</strong>，它没有参数，返回初始化该对象时所用的 C 风格字符串。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">   <span class="keyword">throw</span> <span class="built_in">runtime_error</span>(<span class="string">&quot;Data must be same as size&quot;</span>);<span class="comment">//try 语句块抛出了一个异常</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">catch</span>(runtime_error err)<span class="comment">//在 catch 后面的括号中声明了一个“runtime_error”类型的对象，与 try 抛出的异常类型相同，接下来执行此子句。</span></span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; err.<span class="built_in">what</span>();<span class="comment">//输出 &quot;Data must be same as size&quot;</span></span><br><span class="line">&#125;<span class="comment">//</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>函数在寻找处理代码的过程中退出</strong></p>
+<p>throw 语句可能出现在嵌套的 try 语句块中或在 try 语句块中调用的某个函数内。当异常被抛出，程序会<strong>从内到外一层层寻找相应类型的 catch 子句。</strong>如果最后还是没找到，系统会<strong>调用 terminate 函数并终止当前程序的执行。</strong></p>
+<p>如果 throw 语句外就没有 try 语句块，也会执行 terminate 函数。</p>
+<p>理解：异常中断了程序的正常流程。当发生异常，程序执行到一半就中断了，可能会存在如资源没有正常释放，对象没有处理完成等情况。异常安全的代码要求在异常发生时能正确执行清理工作。这个非常困难。</p>
+<h6 id="5-6-3-标准异常"><a href="#5-6-3-标准异常" class="headerlink" title="5.6.3 标准异常"></a><strong>5.6.3 标准异常</strong></h6><p>C++ 标准库定义了一组异常类，用于报告标准库函数遇到的问题。他们定义在 4 个头文件中。</p>
+<p>定义在 <strong>stdexcept</strong> 头文件中的类型必须使用 string 对象或 C 风格字符串来初始化他们。其他 3 个头文件中的 3 中类型则只能默认初始化，不能提供初始值。</p>
+<p>异常类型只有一个 what 成员函数，该函数没有参数，返回是一个 C 风格字符串的指针，目的是提供关于异常的文本信息。</p>
+<p>对于无初始值的异常类型，what 返回的内容由编译器决定，有初始值的返回初始值。</p>
+<pre><code>    <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;exception头文件&#x27;</span></span><br><span class="line">exception           <span class="comment">// 异常类 exception 是最通用的异常类。它只报告异常的发生，不提供额外信息。</span></span><br><span class="line"><span class="string">&#x27;new头文件&#x27;</span></span><br><span class="line">bad_alloc           <span class="comment">// 异常类 bad_alloc。在使用 new 分配动态内存失败时抛出</span></span><br><span class="line"><span class="string">&#x27;type_info头文件&#x27;</span></span><br><span class="line">bad_cast            <span class="comment">// 异常类型 bad_cast。经常发生在使用 dynamic_cast 时发生。</span></span><br><span class="line"><span class="string">&#x27;stdexcept头文件&#x27;</span></span><br><span class="line">exception</span><br><span class="line">runtime_error       <span class="comment">// 只有在运行时才能检测出的问题</span></span><br><span class="line">range_error         <span class="comment">// 运行时错误：生成的结果超出了有意义的值域范围</span></span><br><span class="line">overflow_error      <span class="comment">// 运行时错误：计算上溢</span></span><br><span class="line">underflow_error     <span class="comment">// 运行时错误：计算下溢</span></span><br><span class="line">logic_error         <span class="comment">// 程序逻辑错误</span></span><br><span class="line">domain_error        <span class="comment">// 逻辑错误：参数对象的结果值不存在</span></span><br><span class="line">invalid_argument    <span class="comment">// 逻辑错误：无效参数</span></span><br><span class="line">length_error        <span class="comment">// 逻辑错误：试图创建一个超出该类型最大长度的对象</span></span><br><span class="line">out_of_range        <span class="comment">// 逻辑错误：使用一个超出有效范围的值</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>上面的异常类之间存在继承关系，其中 exception 是所有其他类的基类，总的继承关系如下图</p>
+<p>​    <img src="https://note.youdao.com/yws/public/resource/80ef131f62e5733164aa3fd1f11c9b29/xmlnote/8A824B95651E4A219BAB42B0D3803B49/33842" alt="0"></p>
+<p>例子</p>
+<p>​                void StrBlob::check(size_type i, const string&amp; msg) { if (i &gt;= data-&gt;size())        throw out_of_range(msg); }              </p>
+
         </div>
 
         
@@ -244,7 +348,7 @@
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">C++ Primer 第一章 开始</span>
+                                <span class="post-nav-title-item">C++ Primer 第四章 表达式</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -257,7 +361,7 @@
                            href="/C++/C++Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%AC%AC%E5%85%AD%E7%AB%A0/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">C++ Primer 第一章 开始</span>
+                                <span class="post-nav-title-item">C++ Primer 第六章 函数</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -368,7 +472,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        
+        <ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-%E7%AE%80%E5%8D%95%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.1 简单语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-%E8%AF%AD%E5%8F%A5%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-text">5.2 语句作用域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-3-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.3 条件语句</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#5-3-1-if%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.3.1 if语句</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-3-2-switch%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.3.2 switch语句</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-4-%E8%BF%AD%E4%BB%A3%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.4 迭代语句</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#5-4-1-while%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.4.1 while语句</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-4-2-%E4%BC%A0%E7%BB%9F%E7%9A%84for%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.4.2 传统的for语句</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-4-3-%E8%8C%83%E5%9B%B4for%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.4.3 范围for语句</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-4-4-dowhile%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.4.4 dowhile语句</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-5-%E8%B7%B3%E8%BD%AC%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.5 跳转语句</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#5-5-1-break%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.5.1 break语句</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-5-2-continue%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.5.2 continue语句</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-5-3-goto%E8%AF%AD%E5%8F%A5"><span class="nav-text">5.5.3 goto语句</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-6-try%E8%AF%AD%E5%8F%A5%E5%9D%97%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-text">5.6 try语句块和异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#5-6-1-throw-%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-text">5.6.1 throw 表达式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-6-2-try%E8%AF%AD%E5%8F%A5%E5%9D%97"><span class="nav-text">5.6.2 try语句块</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-6-3-%E6%A0%87%E5%87%86%E5%BC%82%E5%B8%B8"><span class="nav-text">5.6.3 标准异常</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>

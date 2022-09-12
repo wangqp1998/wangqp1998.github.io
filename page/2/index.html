@@ -344,13 +344,16 @@ C++ 定义了各类型...
 
                 <h3 class="home-article-title">
                     <a href="/C++/C++Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%AC%AC%E5%9B%9B%E7%AB%A0/">
-                        C++ Primer 第一章 开始
+                        C++ Primer 第四章 表达式
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        
+                        4.1 基础4.1.1 基本概念一般二元运算符都要求两个运算对象的类型相同或可以转换为同一种类型。
+小整型（bool, char, short）通常会被提升为大整型，主要是 int。
+运算符作用于类类型的对象时，用户可以自行定义含义，即重载运算符。
+...
                     
                 </div>
 
@@ -372,13 +375,18 @@ C++ 定义了各类型...
 
                 <h3 class="home-article-title">
                     <a href="/C++/C++Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%BA%94%E7%AB%A0/">
-                        C++ Primer 第一章 开始
+                        C++ Primer 第五章 语句
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        
+                        5.1 简单语句表达式语句
+一个表达式加上分号就是表达式语句。表达式的语句执行表达式并丢弃掉求值结果
+12ival + 3;//一条没有实际用处的表达式语句cout &lt;&lt; ival;//一条有用的表达式语句
+
+空语句
+空语句是最简单的语句...
                     
                 </div>
 
@@ -400,13 +408,20 @@ C++ 定义了各类型...
 
                 <h3 class="home-article-title">
                     <a href="/C++/C++Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%AC%AC%E5%85%AD%E7%AB%A0/">
-                        C++ Primer 第一章 开始
+                        C++ Primer 第六章 函数
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        
+                        6.1 函数基础通过调用运算符 () 来执行函数。
+函数的调用会完成****两项工作
+
+用实参初始化函数对应的形参。
+将控制器转移给被调用函数。
+
+调用函数后，主调函数被中断，被调函数开始执行。
+函数执行的第一步：隐式地定义并初始化它的形参。实参是形...
                     
                 </div>
 
@@ -428,13 +443,17 @@ C++ 定义了各类型...
 
                 <h3 class="home-article-title">
                     <a href="/C++/C++Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%83%E7%AB%A0/">
-                        C++ Primer 第一章 开始
+                        C++ Primer 第七章 类
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        
+                        类的基本思想：数据抽象和封装
+封装：将接口和实现分离
+7.0 积累总结7.0.0 类的 const 成员函数const 成员函数不会修改类的数据成员。
+const 成员函数的声明和定义处都要加 const，声明方式：
+12int age() cons...
                     
                 </div>
 
@@ -456,13 +475,16 @@ C++ 定义了各类型...
 
                 <h3 class="home-article-title">
                     <a href="/C++/C++Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%AC%AC%E5%85%AB%E7%AB%A0/">
-                        C++ Primer 第一章 开始
+                        C++ Primer 第八章 IO库
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        
+                        8.1 IO类IO 库类型定义在三个头文件中：
+
+iostream：定义了读写流的类型：istream, ostream, iostream, wistream, wostream, wiostream
+fstream：读写命名文件的类型：ifstr...
                     
                 </div>
 

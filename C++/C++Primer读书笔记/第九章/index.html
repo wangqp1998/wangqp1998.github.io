@@ -9,7 +9,7 @@
     
     <title>
         
-            C++ Primer 第一章 开始 |
+            C++ Primer 第九章 顺序容器 |
         
         wangqp
     </title>
@@ -188,7 +188,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">C++ Primer 第一章 开始</span>
+            <span class="title-hover-animation">C++ Primer 第九章 顺序容器</span>
         </div>
 
         
@@ -225,7 +225,248 @@
         
 
         <div class="article-content markdown-body">
-            
+            <h5 id="9-1-顺序容器概述"><a href="#9-1-顺序容器概述" class="headerlink" title="9.1 顺序容器概述"></a><strong>9.1 顺序容器概述</strong></h5><p>所有容器都提供高效的<strong>动态内存</strong>管理</p>
+<p><strong>几种顺序容器</strong></p>
+<p><strong>vector：</strong>支持快速随机访问。在<strong>尾部</strong>插入/删除速度快。</p>
+<p><strong>deque：</strong>支持快速随机访问。在<strong>头尾</strong>插入/删除都很快。</p>
+<p><strong>list：****双向链表</strong>。只支持<strong>双向顺序访问</strong>。在任何位置插入/删除都很快。</p>
+<p><strong>forward_list</strong>：单项链表。只支持单向顺序访问。在任何位置插入/删除都很快。</p>
+<p><strong>string</strong>：支持快速随机访问。在<strong>尾部</strong>插入/删除速度快。</p>
+<p><strong>array：</strong>固定大小数组。支持快速随机访问。</p>
+<p>可以发现：vector\deque\string\array 都是顺序存储结构。 list 是链式存储结构。但是他们都是顺序容器</p>
+<p>list 的额外内存开销相比其他大很多。</p>
+<p>array 是一种比内置数组更好的类型。</p>
+<p>farward_list 没有 size 操作。这种列表与最好的手写链表性能一样好。</p>
+<p>新标准库容器的性能至少与同类手写数据结构一样好或更好，<strong>c++ 程序应该使用标准库容器。</strong></p>
+<p><strong>容器选择</strong></p>
+<p><strong>vector/list/deque</strong> 三种容器的比较：</p>
+<ol>
+<li>如果没有特殊的理由，使用 vector 是最好的选择</li>
+<li>如果有很多小的元素，不用 list</li>
+<li>如果空间开销很重要，不用 list</li>
+<li>如果需要在中间位置插入/删除，用 list</li>
+<li>如果需要在头尾位置插入/删除，用 deque</li>
+<li>如果需要随机访问，用 vector 或 deque</li>
+<li>如果需要在中间位置插入，而后随机访问：</li>
+</ol>
+<p>①如果可以通过排序解决，就像插到尾部，而后排序</p>
+<p>②在输入阶段用 list ，输入完成后拷贝到 vector 中</p>
+<h5 id="9-2-容器库概览"><a href="#9-2-容器库概览" class="headerlink" title="9.2 容器库概览"></a><strong>9.2 容器库概览</strong></h5><p><strong>通用容器操作</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;类型别名&#x27;</span></span><br><span class="line">iterator</span><br><span class="line">const_iterator</span><br><span class="line">value_type           <span class="comment">// 容器元素类型。定义方式： vector&lt;int&gt;::value_type</span></span><br><span class="line">reference            <span class="comment">// 元素类型的引用。定义方式： vector&lt;int&gt;::reference</span></span><br><span class="line">const_reference      <span class="comment">// 元素的 const 左值类型</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;构造函数&#x27;</span>-<span class="string">&#x27;三种通用的构造函数：同类拷贝、迭代器范围初始化、列表初始化&#x27;</span></span><br><span class="line"><span class="function">C <span class="title">c1</span><span class="params">(c2)</span></span>;            <span class="comment">// 拷贝构造函数，容器类型与元素类型必须都相同</span></span><br><span class="line"><span class="function">C <span class="title">c1</span><span class="params">(c2.begin(),c2.end())</span></span>;   <span class="comment">// 要求两种元素类型可以转换即可。</span></span><br><span class="line">C c1&#123;a,b,c,...&#125;;    <span class="comment">// 使用初始化列表，容器的大小与初始化列表一样大</span></span><br><span class="line"></span><br><span class="line"><span class="function">C <span class="title">c</span><span class="params">(n)</span></span>;             <span class="comment">// 这两种接受大小参数的初始化方式只有顺序容器能用，且 string 无法使用</span></span><br><span class="line"><span class="function">C <span class="title">c</span><span class="params">(n,t)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;赋值与swap&#x27;</span></span><br><span class="line">c1 = c2;</span><br><span class="line">c1 = &#123;a,b,c,....&#125;</span><br><span class="line">a.<span class="built_in">swap</span>(b);</span><br><span class="line"><span class="built_in">swap</span>(a, b);         <span class="comment">// 两种 swap 等价</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;大小&#x27;</span></span><br><span class="line">c.<span class="built_in">size</span>();</span><br><span class="line">c.<span class="built_in">max_size</span>();       <span class="comment">// c 可以保存的最大元素数目，是整个内存层面的容量，不是已分配内存。不同于 caplity, caplity 只能用于 vector，queue，string</span></span><br><span class="line">c.<span class="built_in">empty</span>();</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;添加/删除元素（不适用于array）&#x27;</span></span><br><span class="line">c.<span class="built_in">insert</span>(args);    <span class="comment">// 将 args 中的元素拷贝进 c</span></span><br><span class="line">c.<span class="built_in">emplace</span>(inits);  <span class="comment">// 使用 inits 构造 c 中的一个元素</span></span><br><span class="line">c.<span class="built_in">erase</span>(args);     <span class="comment">// 删除指定的元素</span></span><br><span class="line">c.<span class="built_in">clear</span>();</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;关系运算符&#x27;</span></span><br><span class="line">==; !=; &lt;; &lt;=; &gt;; &gt;=   <span class="comment">// 所有容器都支持相等和不等运算符。无序关联容器不支持大于小于运算符。</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;获取迭代器&#x27;</span></span><br><span class="line">c.<span class="built_in">begin</span>(); c.<span class="built_in">end</span>(); </span><br><span class="line">c.<span class="built_in">cbegin</span>(); c.<span class="built_in">cend</span>();  <span class="comment">// 返回 const_iterator</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;反向容器的额外成员&#x27;</span></span><br><span class="line">reverse_iterator       <span class="comment">// 逆序迭代器，这是一个和 iterator 不同的类型</span></span><br><span class="line">const_reverse_iterator </span><br><span class="line">c.<span class="built_in">rbegin</span>();c.<span class="built_in">rend</span>();</span><br><span class="line">c.<span class="built_in">crbegin</span>();c.<span class="built_in">crend</span>();</span><br></pre></td></tr></table></figure>
+
+<h6 id="9-2-1-迭代器"><a href="#9-2-1-迭代器" class="headerlink" title="9.2.1 迭代器"></a><strong>9.2.1 迭代器</strong></h6><p>用两个迭代器表示的范围都是<strong>左闭合空间</strong>，即 [begin,end)  ：如果 begin 和 end 相等，则为空。</p>
+<p>所有迭代器都可以递增，forward_list 不可以递减</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt;::iterator iter = vec.<span class="built_in">begin</span>();   <span class="comment">// 准确定义迭代器的方式     </span></span><br></pre></td></tr></table></figure>
+
+<h6 id="9-2-4-容器定义和初始化"><a href="#9-2-4-容器定义和初始化" class="headerlink" title="9.2.4 容器定义和初始化"></a><strong>9.2.4 容器定义和初始化</strong></h6><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">const</span> <span class="type">char</span>*&gt; articles = &#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;an&quot;</span>, <span class="string">&quot;the&quot;</span>&#125;;</span><br><span class="line"><span class="function">list&lt;string&gt; <span class="title">words</span><span class="params">(articles.begin(), articles.end())</span></span>;  <span class="comment">// 正确， const char* 类型可以转换成 string类型</span></span><br></pre></td></tr></table></figure>
+
+<p>定义一个<strong>array</strong>，既需要指定元素类型，也需要<strong>指定大小</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array&lt;<span class="type">int</span>,42&gt;;              <span class="comment">// 定义一个有 42 个 0 的数组</span></span><br><span class="line">array&lt;<span class="type">int</span>,42&gt;::size_type;   <span class="comment">// 定义数组类型也需要包括元素类型和大小</span></span><br></pre></td></tr></table></figure>
+
+<p>array的所有元素默认初始化为 0；</p>
+<p>array 列表初始化时，列表元素个数小于等于 array 大小，剩余元素默认初始化为 0 </p>
+<p><strong>array</strong> <strong>只能默认初始化或列表初始化****，如果定义的数组很大并且需要初始化，可以先默认初始化然后用 fill 函数填充值。</strong></p>
+<p><strong>array赋值</strong></p>
+<p>不能对内置数组拷贝或赋值，但是 <strong>array 可以</strong>。</p>
+<p><strong>使用一个 array 对另一个 array 赋值</strong>，需要两个array 元素类型与大小都相同。</p>
+<p>不能用花括号列表对 array 赋值（<strong>只可以初始化</strong>）</p>
+<h6 id="9-2-5-赋值和swap"><a href="#9-2-5-赋值和swap" class="headerlink" title="9.2.5 赋值和swap"></a><strong>9.2.5 赋值和swap</strong></h6><p><strong>“=”赋值</strong></p>
+<p>对容器使用赋值运算符（除 array 外），将会使该容器的<strong>所有元素</strong>被替换。如果两个容器大小不等，<strong>赋值后都与右边容器的原大小相同</strong>。</p>
+<p>array要求赋值前大小就必须一样。</p>
+<p><strong>assign</strong></p>
+<p><strong>assign</strong> 是赋值操作，可以用于<strong>顺序容器</strong>。</p>
+<p>“=” 要求两边类型相同， assign 要求只要可以转换即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lst.<span class="built_in">assign</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>()); <span class="comment">// 使用迭代器范围赋值</span></span><br><span class="line">lst.<span class="built_in">assign</span>(il);                     <span class="comment">// il是一个花括号包围的元素值列表</span></span><br><span class="line">lst.<span class="built_in">assign</span>(n, t);                   <span class="comment">// 将 lst 的元素替换为 n 个 t</span></span><br><span class="line"><span class="string">&#x27;操作等价于&#x27;</span></span><br><span class="line">lst.<span class="built_in">clear</span>();</span><br><span class="line">lst.<span class="built_in">insert</span>(lst.<span class="built_in">begin</span>(), n, t);</span><br></pre></td></tr></table></figure>
+
+<p><strong>swap</strong></p>
+<p>对 array ，swap 交换两个 array 中的元素值。指针、引用和迭代器绑定的元素不变（值变）。</p>
+<p>对于其他容器，swap 不交换元素，只交换数据结构，因此 <strong>swap 操作非常快</strong>。</p>
+<p>对于 string，swap 后，指针、引用和迭代器会失效。对于其他容器，交换后指针指向了另一个容器的相同位置。</p>
+<p>建议统一使用 swap(a,b)，而非 a.swap(b)</p>
+<p>对于 array，swap 操作的时间与元素数目成正比，对于其他容器，swap 操作的时间是常数。</p>
+<h6 id="9-2-6-容器大小操作"><a href="#9-2-6-容器大小操作" class="headerlink" title="9.2.6 容器大小操作"></a><strong>9.2.6 容器大小操作</strong></h6><p>max_size 返回一个大于或等于该类型容器所能容纳的最大元素数的值。</p>
+<h5 id="9-3-顺序容器操作"><a href="#9-3-顺序容器操作" class="headerlink" title="9.3 顺序容器操作"></a><strong>9.3 顺序容器操作</strong></h5><h6 id="9-3-1-添加元素"><a href="#9-3-1-添加元素" class="headerlink" title="9.3.1 添加元素"></a><strong>9.3.1 添加元素</strong></h6><p>主要是三类函数：<strong>push、emplace 和 insert</strong>。</p>
+<p>注意向 vector、string 或 deque 插入元素会使所有指向容器的迭代器、引用和指针失效。</p>
+<p>添加的都是元素的拷贝，不是元素本身。</p>
+<p>头尾添加返回 void，<strong>中间添加返回指向新添加元素的迭代器</strong></p>
+<p><strong>push</strong></p>
+<p>vector 和 string 不支持 push_front 和 emplace_front；forward_list 不支持 push_back 和 emplace_back；</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c.<span class="built_in">push_back</span>(t);   <span class="comment">// 尾部添加一个 t</span></span><br><span class="line">c.<span class="built_in">push_front</span>(t);  <span class="comment">// 头部添加一个 t</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>emplace(c++11 新标准)</strong></p>
+<p>push 和 insert 传递的是元素类型的对象， emplace 则将<strong>参数</strong>传递给元素类型的构造对象。</p>
+<p>即 emplace参数即为元素类型构造函数的参数，因此一般可以为空（默认初始化）。</p>
+<p>emplace 返回值是指向添加元素的迭代器</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c.<span class="built_in">emplace_back</span>(args);  <span class="comment">// 在尾部添加一个由 args 构建的元素</span></span><br><span class="line">c.<span class="built_in">emplace_front</span>(args); <span class="comment">// 在头部添加一个由 args 构建的元素</span></span><br><span class="line">c.<span class="built_in">emplace</span>(p,args);     <span class="comment">// 在迭代器 p 所指元素之前添加一个由 args 构建的元素</span></span><br></pre></td></tr></table></figure>
+
+<p>​          </p>
+<p><strong>insert</strong></p>
+<p>insert 返回值是指向添加的元素中第一个元素的迭代器</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c.<span class="built_in">insert</span>(p, t);       <span class="comment">// 在迭代器 p 所指元素之前添加一个 t</span></span><br><span class="line">c.<span class="built_in">insert</span>(p, n, t);    <span class="comment">// 在迭代器 p 所指元素之前添加 n 个 t</span></span><br><span class="line">c.<span class="built_in">insert</span>(p, b, e);    <span class="comment">// 在迭代器 p 所指元素之前添加迭代器范围 [b,e) 中的元素。注意不能是自己的子序列</span></span><br><span class="line">c.<span class="built_in">insert</span>(p, il);      <span class="comment">// 在迭代器 p 所指元素之前添加花括号列表</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>应用</strong></p>
+<p>在一个位置反复插入元素</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(cin&gt;&gt;word)</span><br><span class="line">    iter = lst.<span class="built_in">insert</span>(iter,word);</span><br></pre></td></tr></table></figure>
+
+<h6 id="9-3-2-访问元素"><a href="#9-3-2-访问元素" class="headerlink" title="9.3.2 访问元素"></a><strong>9.3.2 访问元素</strong></h6><p>访问容器应首先确保容器非空</p>
+<p><strong>begin/end</strong></p>
+<p>begin()/end() 返回迭代器</p>
+<p><strong>front/back</strong></p>
+<p>front()/back() 返回元素的<strong>引用</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c.<span class="built_in">front</span>();</span><br><span class="line">c.<span class="built_in">back</span>();   <span class="comment">//返回的是尾元素的引用（注意不同于尾后迭代器）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>at/下标</strong></p>
+<p>可以快速随机访问的容器都可以使用下标。</p>
+<p>使用下标一定要保证下标不越界，可以用 at 函数。当下标越界，at 函数会抛出一个 out_of_range 异常</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c[n]</span><br><span class="line">c.<span class="built_in">at</span>(n);   <span class="comment">//返回下标为 n 的元素的引用</span></span><br></pre></td></tr></table></figure>
+
+<p>如果要通过 auto 获得元素的引用，定义时一定要记得加上引用符号</p>
+<p>理解：c.front() 返回的是引用，因此可以通过 c.front() = 32; 来给 c 的首元素赋值。而 auto b = c.front() 得到的 b 是等号右端元素的拷贝，不是引用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> &amp;v1 = c.<span class="built_in">back</span>();  <span class="comment">// v1 是元素的引用</span></span><br><span class="line"><span class="keyword">auto</span> v2 = c.<span class="built_in">back</span>();   <span class="comment">// v2 是元素的拷贝</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="9-3-3-删除元素"><a href="#9-3-3-删除元素" class="headerlink" title="9.3.3 删除元素"></a><strong>9.3.3 删除元素</strong></h6><p>三类删除操作：<strong>pop/ erase/ clear</strong></p>
+<p>头尾删除返回 void，特定位置删除返回被删除元素之后元素的迭代器</p>
+<p>vector/string 不支持 <strong>pop_front</strong>，forward_list 不支持 <strong>pop_back。</strong></p>
+<p>forward_list 有自己特殊版本的 erase。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c.<span class="built_in">pop_back</span>();   <span class="comment">// 注意没有返回值，如果想要需要提前保存</span></span><br><span class="line">c.<span class="built_in">pop_front</span>();</span><br><span class="line"></span><br><span class="line">c.<span class="built_in">erase</span>(p);     <span class="comment">// 删除迭代器 p 所指元素</span></span><br><span class="line">c.<span class="built_in">erase</span>(b, e);  <span class="comment">// 删除迭代器范围 [b, e) 内的元素</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>删除元素之前应确保元素存在。</p>
+<p>删除 deque 种除首尾之外的任何元素都会使所有迭代器、引用和指针失效。删除 vector 或 string 中的元素会使指向删除点之后位置的迭代器、引用和指针失效。删除 list 中的元素不会影响指向其他位置的迭代器、引用、指针。</p>
+<p><strong>删除多个元素</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c.<span class="built_in">clear</span>();</span><br><span class="line">c.<span class="built_in">erase</span>(c.<span class="built_in">begin</span>(), c.<span class="built_in">end</span>());  <span class="comment">// 和 c.clear() 等价</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="9-3-4-特殊的forward-list操作"><a href="#9-3-4-特殊的forward-list操作" class="headerlink" title="9.3.4 特殊的forward_list操作"></a><strong>9.3.4 特殊的forward_list操作</strong></h6><p>forward_list 是单向链表，添加和删除操作都会同时改变前驱和后继结点，因此一般的添加和删除都不适用于 forward_list</p>
+<p>forward_list 定义了<strong>首前迭代器</strong>：before_begin() 可以返回首前迭代器，用来删除首元素。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">lst.<span class="built_in">insert_after</span>(p,t);     <span class="comment">// 在迭代器 p 之后添加一个元素 t；insert_after 与 insert 的差别只在于是插入在元素前还是元素后</span></span><br><span class="line">lst.<span class="built_in">insert_after</span>(p,n,t);</span><br><span class="line">lst.<span class="built_in">insert_after</span>(p,b,e);</span><br><span class="line">lst.<span class="built_in">insert_after</span>(p,il);</span><br><span class="line"></span><br><span class="line">lst.<span class="built_in">emplace_after</span>(p,args); <span class="comment">// 在 p 之后构建新元素。</span></span><br><span class="line"></span><br><span class="line">lst.<span class="built_in">erase_after</span>(p);        <span class="comment">// 删除 p 之后的元素，注意 p 不能是尾元素。</span></span><br><span class="line">lst.<span class="built_in">erase_after</span>(b,e);      <span class="comment">// 删除迭代器返回 (b,e) 中的元素，注意不包含 b 和 e</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="9-3-5-改变容器大小"><a href="#9-3-5-改变容器大小" class="headerlink" title="9.3.5 改变容器大小"></a><strong>9.3.5 改变容器大小</strong></h6><p><strong>resize() 用来增大或缩小容器。</strong></p>
+<p>如果要求的大小小于当前大小，尾部会被删除，如果要求的大小大于当前大小，会把新元素添加到尾部</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">list&lt;<span class="type">int</span>&gt; <span class="title">lst</span><span class="params">(<span class="number">10</span>,<span class="number">42</span>)</span></span>;  <span class="comment">// 10 个 42</span></span><br><span class="line">lst.<span class="built_in">resize</span>(<span class="number">15</span>);        <span class="comment">// 添加 5 个 0 到末尾</span></span><br><span class="line">lst.<span class="built_in">resize</span>(<span class="number">25</span>,<span class="number">-1</span>);     <span class="comment">// 添加 10 个 -1 到末尾</span></span><br><span class="line">lst.<span class="built_in">resize</span>(<span class="number">5</span>);         <span class="comment">// 把后面 20 个元素都删除</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="9-3-6-容器操作可能使迭代器失效"><a href="#9-3-6-容器操作可能使迭代器失效" class="headerlink" title="9.3.6 容器操作可能使迭代器失效"></a><strong>9.3.6 容器操作可能使迭代器失效</strong></h6><p>添加和删除元素都可能使指针、引用、迭代器失效。使用失效的指针、引用、迭代器是很严重的错误。</p>
+<p><strong>编写改变容器的循环程序</strong></p>
+<p>必须保证每次改变容器后都<strong>更新迭代器</strong>。</p>
+<p>insert 和 erase 都会返回迭代器，更新很容易。调用 erase 后，<strong>不需要</strong>递增迭代器，调用 insert 后，需要<strong>递增两次</strong>。</p>
+<p><strong>不要保存 end() 返回的迭代器</strong></p>
+<p>push、pop、首尾 emplace 操作都没有返回值，但是都会改变尾后迭代器，因此不能保存 end() 返回值。</p>
+<p>for 循环判断条件中的 end() 每轮都会重新获取迭代器进行判断，因此不用担心（也因此<strong>速度会略慢</strong>，当不改变容器大小时，采用下标更快）</p>
+<h5 id="9-4-vector对象是如何增长的"><a href="#9-4-vector对象是如何增长的" class="headerlink" title="9.4 vector对象是如何增长的"></a><strong>9.4 vector对象是如何增长的</strong></h5><p>vector 和 string 是连续存储的，为了避免每增加一个元素就要重新分配一次空间，在每次必须获取新的内存空间时，通常会分配比新的空间需求更大的内存空间。容器预留多的空间作为备用。</p>
+<p>这种方法在实现时性能恨好，虽然每次重新分配内存都要移动所有元素，但是其<strong>扩张操作通常比 list 和 deque 还快</strong>。</p>
+<p><strong>管理容量</strong></p>
+<p><strong>c.capacity(), c.reserve(), c.shrink_to_fit</strong> 都适用于 vector 和 string，c.shrink_to_fit 还另外适用于 deque。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c.<span class="built_in">capacity</span>();       <span class="comment">// 不重新分配内存空间的话，c 可以保存多少元素。</span></span><br><span class="line">c.<span class="built_in">reserve</span>(n);       <span class="comment">// 分配至少能容纳 n 个元素的空间（只预分配内存）</span></span><br><span class="line">c.<span class="built_in">shrink_to_fit</span>();  <span class="comment">// 请求将 capacity() 减少为与 size() 相同大小。</span></span><br></pre></td></tr></table></figure>
+
+<p>c.reserve(n) 不会减小容量，只会增大容量，当需求容量大于当前容量，才会分配内存，否则什么都不做。</p>
+<p>c.shrink_to_fit() 只是一个请求，，实现时标准库可能会不执行。</p>
+<h5 id="9-5-额外的string操作"><a href="#9-5-额外的string操作" class="headerlink" title="9.5 额外的string操作"></a><strong>9.5 额外的string操作</strong></h5><p>string 提供了一些额外的操作，主要是用于 <strong>C风格字符数组</strong> 和 <strong>下标访问</strong> 两方面</p>
+<h6 id="9-5-1-构造string的其他方法"><a href="#9-5-1-构造string的其他方法" class="headerlink" title="9.5.1 构造string的其他方法"></a><strong>9.5.1 构造string的其他方法</strong></h6><p><strong>构造string的基础方法</strong></p>
+<p>注意：string 不支持在初始化时接受一个数字以指定 string 的大小。</p>
+<p>如果想要指定大小，可以先默认初始化，再调用 resize() 函数调整大小。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C <span class="title">c1</span><span class="params">(c2)</span></span>;           </span><br><span class="line"><span class="function">C <span class="title">c1</span><span class="params">(c2.begin(), c2.end())</span></span>;  </span><br><span class="line">C c1&#123;a, b, c, ...&#125;;   </span><br></pre></td></tr></table></figure>
+
+<p><strong>构造string的其他方法</strong></p>
+<p>string 的构造函数可以接受一个 <strong>string</strong> 或 <strong>const char*</strong> 参数用来指定开始位置，然后接受一个<strong>计数值</strong>用来指定范围。</p>
+<p>如果没有传递计数值用来确定范围，拷贝操作遇到空字符停止（因此此时必须要有空字符）</p>
+<p>开始位置必须保证是在拷贝对象的范围内，计数值也没有上限要求，当计数值指定的范围大于拷贝对象，就最多拷贝到结尾。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">string <span class="title">s</span><span class="params">(cp, n)</span></span>;          <span class="comment">// cp 是一个字符数组，s 是 cp 指向的字符数组前 n 个字符的拷贝。</span></span><br><span class="line"><span class="function">string <span class="title">s</span><span class="params">(s2, pos2)</span></span>;       <span class="comment">// s2 是一个 string 对象，s 是从 s2 的下标 pos 处开始到最后的字符的拷贝。</span></span><br><span class="line"><span class="function">string <span class="title">s</span><span class="params">(s2, pos2, len2)</span></span>; <span class="comment">// s 是从 s2 的下标 pos2 处开始的 len2 个字符的拷贝。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>substr</strong></p>
+<p><strong>s.substr(pos,n)</strong> 返回 s 的一个子序列，范围由参数指定。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s2 = s1.<span class="built_in">substr</span>(<span class="number">0</span>,<span class="number">5</span>);  <span class="comment">// 返回从下标 0 开始，长度为 5 的子序列</span></span><br><span class="line">string s2 = s1.<span class="built_in">substr</span>(<span class="number">6</span>);    <span class="comment">// 返回从下标 6 开始到最后的子序列</span></span><br></pre></td></tr></table></figure>
+
+<p>如果 pos 的值超过了 string 的大小，则 substr 函数会抛出一个 out_of_range 异常；若 pos+n 的值超过了 string 的大小，则 substr 会调整 n 的值，只拷贝到 string 的末尾。</p>
+<h6 id="9-5-2-改变string的其他方法"><a href="#9-5-2-改变string的其他方法" class="headerlink" title="9.5.2 改变string的其他方法"></a><strong>9.5.2 改变string的其他方法</strong></h6><p>string 支持顺序容器的 assign、insert、erase 操作，此外还增加了两个额外的操作</p>
+<ol>
+<li>接受下标版本的 insert 和 erase</li>
+<li>接受 C 风格字符数组的 insert 和 assign</li>
+<li>append 和 replace 函数</li>
+</ol>
+<p><strong>接受下标的 insert 和 erase</strong></p>
+<p>insert 和 erase 接受下标的版本返回的是一个指向 s 的引用（区别于迭代器版本返回指向第一个插入字符的迭代器）。</p>
+<p>insert 的所有版本都是第一部分参数为 pos，后面的参数为待插入的字符</p>
+<p>erase 的所有版本的参数都是 pos，pos 分为 起始位置 和 终止位置/长度</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s.<span class="built_in">insert</span>(s.<span class="built_in">size</span>(), <span class="number">5</span>, <span class="string">&#x27;!&#x27;</span>);       <span class="comment">// 在 s 末尾（s[s.size()]之前）插入 5 个感叹号，注意实际上不存在 s[s.size()];</span></span><br><span class="line">s.<span class="built_in">insert</span>(<span class="number">0</span>, s2, <span class="number">3</span>, s2.<span class="built_in">size</span>()<span class="number">-3</span>);  <span class="comment">// 在 s[0] 之前插入 s2 第四个字符开始的 s2.size()-3 个字符</span></span><br><span class="line">s.<span class="built_in">erase</span>(s.<span class="built_in">size</span>()<span class="number">-5</span>, <span class="number">5</span>);           <span class="comment">// 从 s 删除最后 5 个字符</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>接受 C 风格字符数组的 insert 和 assign</strong></p>
+<p>assign 的所有版本的参数都是要赋的值，由 起始位置 + 终止位置/长度 组成</p>
+<p>replace 的所有版本的参数都是第一部分参数为要删除的范围，第二部分为要插入的字符。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span>* cp = <span class="string">&quot;stately,plump Buck&quot;</span>;</span><br><span class="line">s.<span class="built_in">assign</span>(cp, <span class="number">7</span>);             <span class="comment">// 用从 cp 开始的前 7 个字符向 s 赋值</span></span><br><span class="line">s.<span class="built_in">insert</span>(s.<span class="built_in">size</span>(), cp+<span class="number">7</span>);    <span class="comment">// 将从 cp+7 开始到 cp 末尾的字符插入到 s 末尾</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>append 和 replace</strong></p>
+<p>append：在 string 末尾进行插入操作的简写形式</p>
+<p><strong>replace</strong>：调用 erase 和 insert 操作的简写形式</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s.<span class="built_in">append</span>(<span class="string">&quot; 4th Ed.&quot;</span>);        <span class="comment">// 等价于 s.insert(s.size(),&quot; 4th Ed.&quot;);</span></span><br><span class="line">s.<span class="built_in">replace</span>(<span class="number">11</span>, <span class="number">3</span>, <span class="string">&quot;Fifth&quot;</span>);   <span class="comment">// 从下标 11 开始，删除三个字符并插入 5 个新字符</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="9-5-3-string搜索操作"><a href="#9-5-3-string搜索操作" class="headerlink" title="9.5.3 string搜索操作"></a><strong>9.5.3 string搜索操作</strong></h6><p>string 类提供了 6 个不同的搜索函数，每个函数有 4 个重载版本。</p>
+<p>搜索操作返回 string::size_type 类型，代表匹配位置的下标。</p>
+<p>搜索失败则返回一个名为 string::npos 的 static 成员，值初始化为 <strong>-1</strong>。因为 npos 是一个 unsigned 类型，这个初始值意味着 npos 等于任何 string 最大的可能大小。</p>
+<p>注意：find 和 rfind 查找的是给定的整个 args，而剩下的查找的是给定的 args 中包含的任意一个字符。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">s.<span class="built_in">find</span>(args);               <span class="comment">// 查找 s 中 args 第一次出现的位置</span></span><br><span class="line">s.<span class="built_in">rfind</span>(args);              <span class="comment">// 查找 s 中 args 最后一次出现的位置</span></span><br><span class="line">s.<span class="built_in">find_first_of</span>(args);      <span class="comment">// 查找 s 中 args 的任意一个字符第一次出现的位置</span></span><br><span class="line">s.<span class="built_in">find_last_of</span>(args);       <span class="comment">// 查找 s 中 args 的任意一个字符最后一次出现的位置</span></span><br><span class="line">s.<span class="built_in">find_first_not_of</span>(args);  <span class="comment">// 查找 s 中第一个不在 args 中的字符</span></span><br><span class="line">s.<span class="built_in">find_last_not_of</span>(args);   <span class="comment">// 查找 s 中最后一个不在 args 中的字符</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;args为以下形式&#x27;</span></span><br><span class="line">c,pos         <span class="comment">// 字符，pos 为搜索开始位置</span></span><br><span class="line">s2,pos       <span class="comment">// 字符串</span></span><br><span class="line">cp,pos       <span class="comment">// 以空字符结尾的 c 风格字符串</span></span><br><span class="line">cp,pos,n     <span class="comment">// c 风格字符串的前 n 个字符</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用 pos 循环查找所有 str 包含的字符的位置</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string::size_type pos = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>((pos=s.<span class="built_in">find_first_of</span>(str,pos)) != string::npos )&#123;</span><br><span class="line">    cout &lt;&lt; pos &lt;&lt; endl;</span><br><span class="line">    ++pos;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​     </p>
+<h6 id="9-5-4-compare函数"><a href="#9-5-4-compare函数" class="headerlink" title="9.5.4 compare函数"></a><strong>9.5.4 compare函数</strong></h6><p>用于比较两个字符串，可以是比较整个或一部分字符串。</p>
+<p>小于返回负数，大于返回正数，等于返回零</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> F = s.<span class="built_in">compare</span>(s2);</span><br><span class="line"><span class="type">int</span> F = s.<span class="built_in">compare</span>(pos1,n1,s2);          <span class="comment">// 将 s 中 pos1 开始的前 n1 个字符与 s2 比较</span></span><br><span class="line"><span class="type">int</span> F = s.<span class="built_in">compare</span>(pos1,n1,s2,pos2,n2);  <span class="comment">// 将 s 中 pos1 开始的前 n1 个字符与 s2 中从 pos2 开始的 n2 个字符进行比较</span></span><br><span class="line"><span class="type">int</span> F = s.<span class="built_in">compare</span>(cp)                   <span class="comment">// 将 s 与 cp 指向的字符数组比较</span></span><br><span class="line"><span class="type">int</span> F = s.<span class="built_in">compare</span>(pos1,n1,cp);</span><br><span class="line"><span class="type">int</span> F = s.<span class="built_in">compare</span>(pos1,n1,cp,n2);</span><br></pre></td></tr></table></figure>
+
+<p>​        </p>
+<h6 id="9-5-5-数值转换"><a href="#9-5-5-数值转换" class="headerlink" title="9.5.5 数值转换"></a><strong>9.5.5 数值转换</strong></h6><p>有多个函数可以实现数值数据与标准库 string 之间的转换</p>
+<p>stoi 中要转换的 string 的第一个非空白符必须是数字或 “+”、”-“、”.”</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">to_string</span>(val);  <span class="comment">// 数值转换为字符串</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">stoi</span>(s, p, b);   <span class="comment">// 返回 s 的起始子串的数值。参数 p 用来保存 s 中第一个非数值字符的下标，默认为 0，即不保存下标。参数 b 默认为 10，表示十进制</span></span><br><span class="line"><span class="built_in">stol</span>();<span class="built_in">stoul</span>();<span class="built_in">stoll</span>();<span class="built_in">stoull</span>();</span><br><span class="line"></span><br><span class="line"><span class="built_in">stof</span>(s, p);      <span class="comment">// 返回 s 的起始子串的数值。</span></span><br><span class="line"><span class="built_in">stod</span>();<span class="built_in">stold</span>();</span><br></pre></td></tr></table></figure>
+
+<p>​            </p>
+<p><strong>例子</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s2 = <span class="string">&quot;pi = 3.14&quot;</span>;</span><br><span class="line"><span class="type">double</span> d = <span class="built_in">stod</span>(s2.<span class="built_in">substr</span>(s2.<span class="built_in">find_first_of</span>(<span class="string">&quot;+-.0123456789&quot;</span>)));</span><br><span class="line">            <span class="comment">// 先使用查询方法找出第一个数值字符，返回下标后截取这一个子串，将子串转换为 double</span></span><br></pre></td></tr></table></figure>
+
+<p>​        </p>
+<h5 id="9-6-容器适配器"><a href="#9-6-容器适配器" class="headerlink" title="9.6 容器适配器"></a><strong>9.6 容器适配器</strong></h5><p>标准库定义了三个<strong>顺序容器适配器</strong>:<strong>stack、queue、priority_queue</strong>。</p>
+<p><strong>适配器</strong>是一种机制，是某种事物的行为看起来像另一种事物。</p>
+<p><strong>适配器类型</strong></p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">size_type;</span><br><span class="line">value_type;</span><br><span class="line">container_type;  <span class="comment">// 实现适配器的底层容器类型。</span></span><br></pre></td></tr></table></figure>
+
+<p>​       </p>
+<p><strong>初始化操作</strong></p>
+<p>默认情况下，stack 和 queue 是基于 deque 实现的， priority_queue 是在 vector 之上实现的。</p>
+<p>因此可以直接用一个 deque 来初始化 stack 和 queue。注意：是直接使用容器对象，不是使用迭代器表示的范围。</p>
+<p>priority_queue 不能使用无序的 vector 初始化。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deque&lt;<span class="type">int</span>&gt; deq;</span><br><span class="line"><span class="function">stack&lt;<span class="type">int</span>&gt; <span class="title">sta</span><span class="params">(deq)</span></span>;  <span class="comment">// 用 deq 初始化 sta</span></span><br></pre></td></tr></table></figure>
+
+<p>​       </p>
+<p>如果要使用其他顺序容器实现适配器，要在创建适配器时用一个顺序容器作为第二个类型参数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stack&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt; sta;  <span class="comment">// 定义基于 vector 实现的 stack</span></span><br></pre></td></tr></table></figure>
+
+<p>​         </p>
+<p>stack 可以构造于 <strong>vector, list, deque</strong> 之上。</p>
+<p>queue 可以构造于 <strong>list, deque</strong> 之上。</p>
+<p>priority_queue 可以构造于 <strong>vector、deque</strong> 之上。</p>
+<p><strong>栈适配器：stack</strong></p>
+<p>栈的操作</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s.<span class="built_in">pop</span>();</span><br><span class="line">s.<span class="built_in">push</span>(item);</span><br><span class="line">s.<span class="built_in">emplace</span>(args);  <span class="comment">// 由 args 构造元素并压入栈顶</span></span><br><span class="line">s.<span class="built_in">top</span>();</span><br><span class="line">s.<span class="built_in">size</span>();</span><br><span class="line">s.<span class="built_in">empty</span>();</span><br><span class="line"><span class="built_in">swap</span>(s, s2); s.<span class="built_in">swap</span>(s2);</span><br></pre></td></tr></table></figure>
+
+<p><strong>队列适配器：queue</strong></p>
+<p>queue 和 priority_queue 都定义在<strong>头文件 queue</strong> 中</p>
+<p>队列适配器的操作</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">q.<span class="built_in">pop</span>();          <span class="comment">// 删除 queue 的首元素</span></span><br><span class="line">q.<span class="built_in">push</span>(item);     <span class="comment">// 在 queue 末尾插入一个元素</span></span><br><span class="line">q.<span class="built_in">emplace</span>(args);  <span class="comment">// 构造元素</span></span><br><span class="line"></span><br><span class="line">q.<span class="built_in">front</span>();        <span class="comment">// 返回首元素</span></span><br><span class="line">q.<span class="built_in">back</span>();         <span class="comment">// 返回尾元素。</span></span><br><span class="line"></span><br><span class="line">q.<span class="built_in">size</span>();</span><br><span class="line">q.<span class="built_in">empty</span>();</span><br><span class="line"><span class="built_in">swap</span>(q,q2);q.<span class="built_in">swap</span>(q2);</span><br></pre></td></tr></table></figure>
+
+<p>queue 为先进先出队列。</p>
+<p><strong>优先队列：priority_queue</strong></p>
+<p>queue 和 priority_queue 都定义在<strong>头文件 queue</strong> 中。</p>
+<p>创建 stack, queue, priority_queue 时都可以用一个顺序容器作为第二个类型参数，此外创建 priority_quque 时还可以额外传递第三个参数：一个函数对象来决定如何对 priority_queue 中的元素进行排序。</p>
+<p><strong>大根堆和小根堆</strong></p>
+<p>priority_queue 默认采用的是 less ，默认情况下 q.top() 是最大的元素，即大根堆。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">priority_queue &lt;<span class="type">int</span>&gt; q;      <span class="comment">// 默认采用 vector 作为容器，采用 less&lt;Type&gt; 比较元素，是大根堆</span></span><br><span class="line">priority_queue &lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;<span class="type">int</span>&gt; &gt; q;  <span class="comment">// 采用 greater&lt;Type&gt; 比较元素，生成小根堆</span></span><br></pre></td></tr></table></figure>
+
+<p>其他操作：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">q.<span class="built_in">pop</span>();          <span class="comment">// 删除 priority_queue 的最高优先级元素</span></span><br><span class="line">q.<span class="built_in">push</span>(item);     <span class="comment">// 在 priority_queue 适当的位置插入一个元素</span></span><br><span class="line">q.<span class="built_in">emplace</span>(args);  <span class="comment">// 构造元素</span></span><br><span class="line">q.<span class="built_in">top</span>();          <span class="comment">// 返回最高优先级元素</span></span><br><span class="line">q.<span class="built_in">size</span>();</span><br><span class="line">q.<span class="built_in">empty</span>();</span><br><span class="line"><span class="built_in">swap</span>(q, q2); q.<span class="built_in">swap</span>(q2);</span><br></pre></td></tr></table></figure>
+
+<p>​           </p>
+<p>priority_queue 为元素建立优先级。新加入的元素排在所有优先级比它低的元素之前。priority_queue 元素可以重复</p>
+<p>priority_queue 不能使用无序的 vector 初始化。</p>
+
         </div>
 
         
@@ -244,7 +485,7 @@
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">C++ Primer 第一章 开始</span>
+                                <span class="post-nav-title-item">C++ Primer 第八章 IO库</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -257,7 +498,7 @@
                            href="/C++/C++Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%AC%AC%E5%8D%81%E7%AB%A0/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">C++ Primer 第一章 开始</span>
+                                <span class="post-nav-title-item">C++ Primer 第十章 泛型算法</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -368,7 +609,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        
+        <ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#9-1-%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E6%A6%82%E8%BF%B0"><span class="nav-text">9.1 顺序容器概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-2-%E5%AE%B9%E5%99%A8%E5%BA%93%E6%A6%82%E8%A7%88"><span class="nav-text">9.2 容器库概览</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#9-2-1-%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-text">9.2.1 迭代器</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-2-4-%E5%AE%B9%E5%99%A8%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">9.2.4 容器定义和初始化</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-2-5-%E8%B5%8B%E5%80%BC%E5%92%8Cswap"><span class="nav-text">9.2.5 赋值和swap</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-2-6-%E5%AE%B9%E5%99%A8%E5%A4%A7%E5%B0%8F%E6%93%8D%E4%BD%9C"><span class="nav-text">9.2.6 容器大小操作</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-3-%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C"><span class="nav-text">9.3 顺序容器操作</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#9-3-1-%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-text">9.3.1 添加元素</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-3-2-%E8%AE%BF%E9%97%AE%E5%85%83%E7%B4%A0"><span class="nav-text">9.3.2 访问元素</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-3-3-%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-text">9.3.3 删除元素</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-3-4-%E7%89%B9%E6%AE%8A%E7%9A%84forward-list%E6%93%8D%E4%BD%9C"><span class="nav-text">9.3.4 特殊的forward_list操作</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-3-5-%E6%94%B9%E5%8F%98%E5%AE%B9%E5%99%A8%E5%A4%A7%E5%B0%8F"><span class="nav-text">9.3.5 改变容器大小</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-3-6-%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C%E5%8F%AF%E8%83%BD%E4%BD%BF%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%A4%B1%E6%95%88"><span class="nav-text">9.3.6 容器操作可能使迭代器失效</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-4-vector%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%A6%82%E4%BD%95%E5%A2%9E%E9%95%BF%E7%9A%84"><span class="nav-text">9.4 vector对象是如何增长的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-5-%E9%A2%9D%E5%A4%96%E7%9A%84string%E6%93%8D%E4%BD%9C"><span class="nav-text">9.5 额外的string操作</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#9-5-1-%E6%9E%84%E9%80%A0string%E7%9A%84%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="nav-text">9.5.1 构造string的其他方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-5-2-%E6%94%B9%E5%8F%98string%E7%9A%84%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="nav-text">9.5.2 改变string的其他方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-5-3-string%E6%90%9C%E7%B4%A2%E6%93%8D%E4%BD%9C"><span class="nav-text">9.5.3 string搜索操作</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-5-4-compare%E5%87%BD%E6%95%B0"><span class="nav-text">9.5.4 compare函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-5-5-%E6%95%B0%E5%80%BC%E8%BD%AC%E6%8D%A2"><span class="nav-text">9.5.5 数值转换</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-6-%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8"><span class="nav-text">9.6 容器适配器</span></a></li></ol>
     </div>
 </div>
         </aside>

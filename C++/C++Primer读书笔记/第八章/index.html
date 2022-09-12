@@ -9,7 +9,7 @@
     
     <title>
         
-            C++ Primer 第一章 开始 |
+            C++ Primer 第八章 IO库 |
         
         wangqp
     </title>
@@ -188,7 +188,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">C++ Primer 第一章 开始</span>
+            <span class="title-hover-animation">C++ Primer 第八章 IO库</span>
         </div>
 
         
@@ -225,7 +225,113 @@
         
 
         <div class="article-content markdown-body">
-            
+            <h5 id="8-1-IO类"><a href="#8-1-IO类" class="headerlink" title="8.1 IO类"></a><strong>8.1 IO类</strong></h5><p>IO 库类型定义在三个头文件中：</p>
+<ol>
+<li><strong>iostream：</strong>定义了读写流的类型：istream, ostream, iostream, wistream, wostream, wiostream</li>
+<li><strong>fstream：</strong>读写命名文件的类型：ifstream, ofstream, fstream, wifstream, wofstream, wfstream</li>
+<li><strong>sstream：</strong>读写内存 string 对象的类型：istringstream, ostringstream, stringstream</li>
+</ol>
+<p>其中带 w 前缀的类型用来操作**宽字符语言(wchar_t)**。宽字符版本的类型和函数前都有一个 w，如 wcin, wcout, wcerr。</p>
+<p>fstream 和 sstream 中的类型都继承自 iostream 中的类型。</p>
+<p>可以将一个派生类对象当成基类对象来使用。</p>
+<p>所有这些输入输出流对象的 &gt;&gt; 操作都是读取一个单词。</p>
+<p>理解：</p>
+<ol>
+<li>输入流和输出流都是流对象，输入流就是要用 &gt;&gt; 把流对象中的内容保存到变量中，输出流就是要用 &lt;&lt; 把变量保存到流对象中。一个流是和控制台窗口或一个文件或字符串等相关联的，如 cin、cout 都和控制台窗口相关联。</li>
+</ol>
+<h6 id="8-1-1-IO对象无拷贝或赋值"><a href="#8-1-1-IO对象无拷贝或赋值" class="headerlink" title="8.1.1 IO对象无拷贝或赋值"></a><strong>8.1.1 IO对象无拷贝或赋值</strong></h6><p><strong>不能拷贝或对 IO 对象赋值</strong>，因此也不能将形参或返回类型设置成流类型。</p>
+<p>进行 IO 操作的函数通常<strong>以引用形式传递和返回流</strong>。读写 IO 对象会改变其状态，因此引用不能是 const 的。</p>
+<h6 id="8-1-2-条件状态"><a href="#8-1-2-条件状态" class="headerlink" title="8.1.2 条件状态"></a><strong>8.1.2 条件状态</strong></h6><p>IO 操作的问题是可能发生错误。<strong>因此在使用一个流之前，应该先检查它是否处于良好状态</strong>。</p>
+<p><strong>条件状态</strong>用来查看流的状态。</p>
+<p><strong>IO 库的状态</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iostream::iostate;<span class="comment">//作为位集合来使用，可以表达流的完整状态。通过位运算符可以一次性检测或设置多个标志位。</span></span><br><span class="line">iostream::badbit; cin.badbit;<span class="comment">//表示流已崩溃，是系统及错误或不可恢复的读写错误。流无法再使用。</span></span><br><span class="line">iostream::failbit; cin.failbit;<span class="comment">//表示一个 IO 操作失败了，是可恢复错误。修正后流可以继续使用。</span></span><br><span class="line">iostream::eofbit; cin.eofbit;<span class="comment">//表示流到达了文件结束</span></span><br><span class="line">iostream::goodbit;<span class="comment">//表示流未处于错误状态</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>检查流的状态</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(cin &gt;&gt; word);<span class="comment">// &gt;&gt; 表达式返回流的状态</span></span><br><span class="line"><span class="keyword">while</span>(cin.<span class="built_in">good</span>());<span class="comment">// 意义同上</span></span><br><span class="line"><span class="keyword">while</span>(!cin.<span class="built_in">fail</span>());<span class="comment">// 意义同上。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>管理条件状态</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cin.<span class="built_in">rdstate</span>();<span class="comment">//返回一个 iostate 值表示当前状态。</span></span><br><span class="line">cin.<span class="built_in">setstate</span>(state);<span class="comment">//接受一个 iostate 类型的参数，将给定条件位置位。</span></span><br><span class="line">cin.<span class="built_in">clear</span>();<span class="comment">//清除（复位）所有错误标志位，cin.clear() 后，cin.good() 会返回 true</span></span><br><span class="line">cin.<span class="built_in">clear</span>(state);<span class="comment">//接受一个 iostate 类型的参数，设为流的新状态。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>设置某个标志位的方式</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cin.<span class="built_in">clear</span>(cin.<span class="built_in">rdstate</span>() &amp; ~cin.failbit);<span class="comment">//将 failbit 复位</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="8-1-3-管理输出缓冲"><a href="#8-1-3-管理输出缓冲" class="headerlink" title="8.1.3 管理输出缓冲"></a><strong>8.1.3 管理输出缓冲</strong></h6><p>每个输出流都管理一个缓冲区。</p>
+<p><strong>缓冲刷新（即数据真正写到设备或文件）的原因：</strong></p>
+<ol>
+<li>程序正常结束，比如执行到了 return。</li>
+<li>缓冲区满了</li>
+<li>使用操纵符如 <strong>endl, flush, ends</strong> 来显示刷新缓冲区</li>
+<li>当读写被关联的流时，如读 cin 或写 cerr 都会刷新 cout 的缓冲区</li>
+<li>使用操纵符 unitbuf 设置流的内部状态来清空缓冲区。</li>
+</ol>
+<p><strong>操纵符</strong> <strong>endl, flush, ends</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; a &lt;&lt; endl;<span class="comment">//输出 a 和一个换行，然后刷新缓冲区</span></span><br><span class="line">cout &lt;&lt; a &lt;&lt; flush;<span class="comment">//输出 a，然后刷新缓冲区</span></span><br><span class="line">cout &lt;&lt; a &lt;&lt; ends;<span class="comment">//输出 a 和一个空字符，然后刷新缓冲区</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>操纵符</strong> <strong>unitbuf, nounitbuf</strong></p>
+<ul>
+<li><strong>unitbuf：</strong>告诉流接下来每次写操作之后都进行一次 flush 操作</li>
+<li><strong>nounitbuf：</strong>重置流，恢复正常的刷新机制</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; unitbuf; <span class="comment">//后面的所有输出操作都会立即刷新缓冲区</span></span><br><span class="line">cout &lt;&lt; nounitbuf; <span class="comment">//回到正常的缓冲方式</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：如果程序异常终止，将不会刷新缓冲区，即此时相应的输出操作已执行但没有打印。</p>
+<p><strong>关联输入和输出流</strong></p>
+<p>当一个输入流关联到一个输出流，每次从该输入流读取数据前都会先刷新关联的输出流。</p>
+<p>标准库将 cin 和 cout 关联在一起。</p>
+<p>输入流的成员函数 <strong>tie</strong> 可以用来查看关联的输出流或关联到输出流：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cin.<span class="built_in">tie</span>();<span class="comment">//返回指向关联到 cin 的输出流的指针，如果没有关联的输出流，返回空指针。</span></span><br><span class="line">cin.<span class="built_in">tie</span>(&amp;cerr);<span class="comment">//接受一个指向输出流 cerr 的指针作为参数，将 cin 与 cerr 关联在一起</span></span><br><span class="line">cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);<span class="comment">//cin 不再与其他流关联</span></span><br></pre></td></tr></table></figure>
+
+<p>每个流最多关联到一个输出流，但一个输出流可以被多个流关联。</p>
+<h5 id="8-2-文件输入输出"><a href="#8-2-文件输入输出" class="headerlink" title="8.2 文件输入输出"></a><strong>8.2 文件输入输出</strong></h5><p>头文件 fstream 中定义的 ifstream, ofstream, fstream 类型用来对文件进行读写。</p>
+<p>当要读写一个文件时，创建一个文件流对象并将之绑定到该文件。</p>
+<h6 id="8-2-1-使用文件流对象"><a href="#8-2-1-使用文件流对象" class="headerlink" title="8.2.1 使用文件流对象"></a><strong>8.2.1 使用文件流对象</strong></h6><p>C++11 中，文件名可以是 string 类型对象，也可以是 C 风格字符串</p>
+<p><strong>fstream 定义和初始化</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fstream fs;                    <span class="comment">// 创建一个未绑定的文件流 fs</span></span><br><span class="line"><span class="function">fstream <span class="title">fs</span><span class="params">(<span class="string">&#x27;data.txt&#x27;</span>)</span></span>;        <span class="comment">// 创建一个绑定到文件 data.txt 的文件流 fs,并打开文件 data.txt</span></span><br><span class="line"><span class="function">fstream <span class="title">fs</span><span class="params">(<span class="string">&#x27;data.txt&#x27;</span>, mode)</span></span>;  <span class="comment">// 与上一个构造函数类似，但是按指定模式 mode 打开文件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>fstream 特有操作</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getline</span>(ifs, s);         <span class="comment">// 从一个输入流 ifs 读取一行字符串存入 s 中</span></span><br><span class="line">fs.<span class="built_in">open</span>(<span class="string">&#x27;data.ext&#x27;</span>);     <span class="comment">// 将 fs 与文件 data.txt 绑定并打开该文件。如果已打开会发生错误。</span></span><br><span class="line">fs.<span class="built_in">close</span>();              <span class="comment">// 关闭 fs 绑定的文件。</span></span><br><span class="line">fs.<span class="built_in">is_open</span>();            <span class="comment">// 返回一个 bool 值，指出关联文件是否成功打开。</span></span><br></pre></td></tr></table></figure>
+
+<p>当定义了一个空的文件流对象，使用 open 函数将其与文件关联并打开文件。</p>
+<p>如果 open 失败，failebit 会被置位，<strong>建议每次 open 后检测 open 是否成功。</strong> </p>
+<p>不能对已打开的文件流调用 open。</p>
+<p>当文件关闭后，可以将文件流关联到另一个文件。</p>
+<p>当一个 fstream 对象被销毁时，close 函数会自动被调用。</p>
+<p><strong>用 fstream 代替 iostream</strong></p>
+<p>使用 iostream 类型的引用作为函数参数的地方，都可以使用 fstream 来代替。</p>
+<h6 id="8-2-2-文件模式"><a href="#8-2-2-文件模式" class="headerlink" title="8.2.2 文件模式"></a><strong>8.2.2 文件模式</strong></h6><p>每次打开文件都以某种模式打开，如未指定即以该文件流类型的默认模式打开。</p>
+<p>每个流都有一个关联的文件模式，用来指出如何使用文件</p>
+<ul>
+<li>in：以只读方式打开</li>
+<li>out：以只写方式打开</li>
+<li><strong>app：</strong>每次写操作前均定位到文件末尾</li>
+<li><strong>ate：</strong>打开文件后即定位到文件末尾</li>
+<li><strong>trunc：</strong>截断文件</li>
+<li>binary：以二进制方式进行 IO</li>
+</ul>
+<p><strong>文件模式的使用：</strong></p>
+<ul>
+<li>每个流对象都有默认的文件模式，ifstream 默认 in 模式打开文件，ofstream 默认 out，fstream 默认 in 和 out。</li>
+<li>对 ifstream 对象不能设置 out 模式，对 ofstream 对象不能设置 in 模式</li>
+<li>只有设置了 out 才能设置 trunc 模式，只设置 out 模式会默认也设置 trunc 模式</li>
+<li>设置了 trunc 就不能再设置 app 模式</li>
+<li><strong>默认情况下以 out 模式打开文件会使文件内容被清空</strong>，如果要保留文件内容需要同时指定 app 模式或 in 模式。</li>
+<li>app 模式下，会将写入的数据追加写到文件末尾</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ofstream <span class="title">fout</span><span class="params">(<span class="string">&quot;file1.txt&quot;</span>)</span></span>;                                  <span class="comment">// 以输出模式打开文件并截断文件（即清空文件内容）</span></span><br><span class="line"><span class="function">ofstream <span class="title">fout</span><span class="params">(<span class="string">&quot;file1.txt&quot;</span>, ofstream::app)</span></span>;                   <span class="comment">// 显示指定 app 模式（+隐含的 out 模式）</span></span><br><span class="line"><span class="function">ofstream <span class="title">fout</span><span class="params">(<span class="string">&quot;file1.txt&quot;</span>, ofstream::app | ofstream::out)</span></span>;   <span class="comment">// 同上，只是将 out 模式显式地指定了一下。</span></span><br><span class="line">fout.<span class="built_in">open</span>(<span class="string">&quot;file1.txt&quot;</span>, ofstream::out);</span><br></pre></td></tr></table></figure>
+
+<h5 id="8-3-string流"><a href="#8-3-string流" class="headerlink" title="8.3 string流"></a><strong>8.3 string流</strong></h5><p>sstream 定义了 <strong>istringstream, ostringstream, stringstream</strong> 来读写 string。</p>
+<p><strong>sstream 定义和初始化</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">stringstream <span class="title">strm</span><span class="params">()</span></span>;     <span class="comment">// 定义一个未绑定的 stringstream 对象</span></span><br><span class="line"><span class="function">stringstream <span class="title">strm</span><span class="params">(s)</span></span>;    <span class="comment">// 定义一个 stringstream 对象 strm，strm 中保存着 string s 的拷贝。</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="8-3-1-使用istringstream"><a href="#8-3-1-使用istringstream" class="headerlink" title="8.3.1 使用istringstream"></a><strong>8.3.1 使用istringstream</strong></h6><p><strong>stringstream 特有操作</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">strm.<span class="built_in">str</span>();   <span class="comment">// 返回 strm 中保存的 str 的拷贝</span></span><br><span class="line">strm.<span class="built_in">str</span>(s);  <span class="comment">// 将 string s 拷贝到 strm 中，返回 void</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="8-3-2-使用ostringstream"><a href="#8-3-2-使用ostringstream" class="headerlink" title="8.3.2 使用ostringstream"></a><strong>8.3.2 使用ostringstream</strong></h6><p>理解：</p>
+<ol>
+<li>istringstream 是输入流，即读操作，要将流中的内容输入到字符串中，因此定义和使用 istringstream 时流内必须有内容，所以在使用前要提前在流内保存一个字符串</li>
+<li>ostringstream 是输出流，即写操作，将流中的内容输出到字符串中，ostringstream 可以在定义时即在流中保存一个字符串，也可以通过 &lt;&lt; 操作符获得字符串。</li>
+</ol>
+
         </div>
 
         
@@ -244,7 +350,7 @@
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">C++ Primer 第一章 开始</span>
+                                <span class="post-nav-title-item">C++ Primer 第七章 类</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -257,7 +363,7 @@
                            href="/C++/C++Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B9%9D%E7%AB%A0/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">C++ Primer 第一章 开始</span>
+                                <span class="post-nav-title-item">C++ Primer 第九章 顺序容器</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -368,7 +474,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        
+        <ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#8-1-IO%E7%B1%BB"><span class="nav-text">8.1 IO类</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#8-1-1-IO%E5%AF%B9%E8%B1%A1%E6%97%A0%E6%8B%B7%E8%B4%9D%E6%88%96%E8%B5%8B%E5%80%BC"><span class="nav-text">8.1.1 IO对象无拷贝或赋值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#8-1-2-%E6%9D%A1%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="nav-text">8.1.2 条件状态</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#8-1-3-%E7%AE%A1%E7%90%86%E8%BE%93%E5%87%BA%E7%BC%93%E5%86%B2"><span class="nav-text">8.1.3 管理输出缓冲</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-2-%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-text">8.2 文件输入输出</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#8-2-1-%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E6%B5%81%E5%AF%B9%E8%B1%A1"><span class="nav-text">8.2.1 使用文件流对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#8-2-2-%E6%96%87%E4%BB%B6%E6%A8%A1%E5%BC%8F"><span class="nav-text">8.2.2 文件模式</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-3-string%E6%B5%81"><span class="nav-text">8.3 string流</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#8-3-1-%E4%BD%BF%E7%94%A8istringstream"><span class="nav-text">8.3.1 使用istringstream</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#8-3-2-%E4%BD%BF%E7%94%A8ostringstream"><span class="nav-text">8.3.2 使用ostringstream</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
